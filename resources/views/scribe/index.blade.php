@@ -69,7 +69,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">http://localhost:8000</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
 
@@ -77,7 +77,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 
     <p>User Authentication</p>
 
-            <h2 id="auth-POSTapi-v1-auth-register">Register a new user</h2>
+            <h2 id="auth-POSTapi-v1-auth-register">User Registration</h2>
 
 <p>
 </p>
@@ -94,10 +94,10 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"qui\",
-    \"email\": \"sed\",
-    \"password\": \"laboriosam\",
-    \"confirm_password\": \"dolorem\"
+    \"name\": \"aut\",
+    \"email\": \"doloribus\",
+    \"password\": \"illum\",
+    \"confirm_password\": \"molestias\"
 }"
 </code></pre>
 
@@ -112,10 +112,10 @@ const headers = {
 };
 
 let body = {
-    "name": "qui",
-    "email": "sed",
-    "password": "laboriosam",
-    "confirm_password": "dolorem"
+    "name": "aut",
+    "email": "doloribus",
+    "password": "illum",
+    "confirm_password": "molestias"
 }
 
 fetch(url, {
@@ -133,10 +133,10 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'qui',
-            'email' =&gt; 'sed',
-            'password' =&gt; 'laboriosam',
-            'confirm_password' =&gt; 'dolorem',
+            'name' =&gt; 'aut',
+            'email' =&gt; 'doloribus',
+            'password' =&gt; 'illum',
+            'confirm_password' =&gt; 'molestias',
         ],
     ]
 );
@@ -238,8 +238,8 @@ print_r(json_decode((string) $body));</code></pre>
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"email\": \"occaecati\",
-    \"password\": \"consectetur\"
+    \"email\": \"ut\",
+    \"password\": \"laboriosam\"
 }"
 </code></pre>
 
@@ -254,8 +254,8 @@ const headers = {
 };
 
 let body = {
-    "email": "occaecati",
-    "password": "consectetur"
+    "email": "ut",
+    "password": "laboriosam"
 }
 
 fetch(url, {
@@ -273,8 +273,8 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'email' =&gt; 'occaecati',
-            'password' =&gt; 'consectetur',
+            'email' =&gt; 'ut',
+            'password' =&gt; 'laboriosam',
         ],
     ]
 );
@@ -342,6 +342,107 @@ print_r(json_decode((string) $body));</code></pre>
 <p>Password</p>        </p>
     
     </form>
+
+            <h2 id="auth-POSTapi-v1-auth-logout">User Logout</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-auth-logout">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/api/v1/auth/logout" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --header "Access-Control-Allow-Origin: *"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/auth/logout"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Access-Control-Allow-Origin": "*",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost:8000/api/v1/auth/logout',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Accept' =&gt; 'application/json',
+            'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-v1-auth-logout">
+</span>
+<span id="execution-results-POSTapi-v1-auth-logout" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-auth-logout"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-auth-logout"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-auth-logout" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-auth-logout"></code></pre>
+</span>
+<form id="form-POSTapi-v1-auth-logout" data-method="POST"
+      data-path="api/v1/auth/logout"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-auth-logout', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-auth-logout"
+                    onclick="tryItOut('POSTapi-v1-auth-logout');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-auth-logout"
+                    onclick="cancelTryOut('POSTapi-v1-auth-logout');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-auth-logout" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/auth/logout</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-v1-auth-logout" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTapi-v1-auth-logout"
+                                                                data-component="header"></label>
+        </p>
+                </form>
 
     
 

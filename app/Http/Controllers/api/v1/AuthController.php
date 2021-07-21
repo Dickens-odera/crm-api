@@ -41,19 +41,19 @@ class AuthController extends Controller
             return $this->commonResponse(false,Arr::flatten($validator->messages()->get('*')),'', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         try{
-            $user = User::create(
+            $newUser = User::create(
                 array_merge($request->validated(),['password' => Hash::make($request->password)])
             );
-            if(!$user){
+            if(!$newUser){
                 return $this->commonResponse(false,'Registration Unsuccessful, please try again', '', Response::HTTP_UNPROCESSABLE_ENTITY);
             }
+            return $this->commonResponse(true,'Registration successful', new UserResource($newUser), Response::HTTP_CREATED);
         }catch(QueryException $exception){
             return $this->commonResponse(false, $exception->errorInfo[2], '', Response::HTTP_UNPROCESSABLE_ENTITY);
         }catch(Exception $exception){
             Log::critical('Something went wrong registering a new user. ERROR:'. $exception->getTraceAsString());
             return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return $this->commonResponse(true,'Registration successful', new UserResource($user), Response::HTTP_CREATED);
     }
 
     /**
@@ -87,14 +87,34 @@ class AuthController extends Controller
             }
             $data = [
                 'user' => new UserResource($user),
-                'accessToken' => $user->createToken('crm-user')->plainTextToken //generate access token for the user
+                'accessToken' => $user->createToken('crm-user')->plainTextToken //generate an access token for the user
             ];
+            return $this->commonResponse(true,'Login Success', $data,Response::HTTP_OK);
         }catch (QueryException $exception){
             return $this->commonResponse(false, $exception->errorInfo[2], '', Response::HTTP_UNPROCESSABLE_ENTITY);
         }catch (Exception $exception){
             Log::critical('Something went wrong logging in the user. ERROR:'. $exception->getTraceAsString());
             return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
         }
-        return $this->commonResponse(true,'Login Success', $data,Response::HTTP_OK);
+    }
+
+    /**
+     * User Logout
+     * @param Request $request
+     * @return JsonResponse
+     * @authenticated
+     */
+    public function logout(Request $request): JsonResponse
+    {
+        try{
+            $user = $request->user();
+            if($user->tokens()->delete()){
+                return $this->commonResponse(true,'Logout Successful','',Response::HTTP_OK);
+            }
+            return $this->commonResponse(true,'Failed to logout','',Response::HTTP_EXPECTATION_FAILED);
+        }catch (Exception $exception){
+            Log::critical('Failed to perform user logout. ERROR '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
