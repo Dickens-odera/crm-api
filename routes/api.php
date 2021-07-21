@@ -25,4 +25,13 @@ Route::group(['prefix' => 'v1'], function(){
             Route::post('/logout',[AuthController::class,'logout']);
        });
     });
+    //customer routes
+    Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'customers'], function(){
+        //Route::resource('customers',CustomerController::class);
+        Route::get('/',[CustomerController::class,'index']);
+        Route::get('/{customer}',[CustomerController::class,'show']);
+        Route::post('/create',[CustomerController::class,'store']);
+        Route::patch('/{customer}/update',[CustomerController::class,'update']);
+        Route::delete('/{customer}/delete',[CustomerController::class,'destroy']);
+    });
 });
