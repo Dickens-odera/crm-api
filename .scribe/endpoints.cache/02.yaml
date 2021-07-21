@@ -47,7 +47,7 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 7
+        example: 18
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -76,7 +76,31 @@ endpoints:
       Access-Control-Allow-Origin: '*'
     urlParameters: []
     queryParameters: []
-    bodyParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The User Name'
+        required: true
+        example: consequatur
+        type: string
+      email:
+        name: email
+        description: 'User Email'
+        required: true
+        example: eum
+        type: email
+      password:
+        name: password
+        description: 'User Password'
+        required: true
+        example: quam
+        type: password
+      password_confirmation:
+        name: password_confirmation
+        description: 'Password Confirmation'
+        required: true
+        example: harum
+        type: password
     responses: []
     responseFields: []
   -
@@ -97,7 +121,7 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 15
+        example: 7
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -121,7 +145,7 @@ endpoints:
         name: id
         description: 'The ID of the user.'
         required: true
-        example: 6
+        example: 9
         type: integer
     queryParameters: []
     bodyParameters: []

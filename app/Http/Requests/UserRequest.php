@@ -26,8 +26,8 @@ class UserRequest extends FormRequest
         return [
             'name' => 'required|string|unique:users|min:3|max:20',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:4|max:60',
-            'confirm_password' => 'required'
+            'password' => 'required|min:4|max:60|confirmed',
+            'password_confirmation' => 'required'
         ];
     }
     public function messages(): array
@@ -44,8 +44,8 @@ class UserRequest extends FormRequest
             'password.required' => 'Please provide your password',
             'password.min'      => 'The password cannot be less than 4 characters long',
             'password.max'      => 'The password cannot be more than 60 characters long',
-           // 'password.confirmed'  => 'Password confirmations do not match',
-            'confirm_password.required' => 'Please confirm your password',
+            'password.confirmed'  => 'Password confirmations do not match',
+            'password_confirmation.required' => 'Please confirm your password',
         ];
     }
 }
