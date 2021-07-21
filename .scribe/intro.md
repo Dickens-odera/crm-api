@@ -1,6 +1,6 @@
 # Introduction
 
-The API powering the Agile Monkeys CMS
+Agile Monkeys CMR API
 
 This documentation aims to provide all the information you need to work with our API.
 

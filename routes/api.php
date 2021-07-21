@@ -17,7 +17,8 @@ use App\Http\Controllers\api\v1\AuthController;
 */
 
 Route::group(['prefix' => 'v1'], function(){
-    Route::group(['prefix' => 'users'], function(){
-       Route::get('/',[UserController::class,'users']);
+    //user authentication
+    Route::group(['prefix' => 'auth'], function(){
+       Route::post('/register',[AuthController::class,'register']);
     });
 });
