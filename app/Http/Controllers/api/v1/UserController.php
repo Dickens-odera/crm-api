@@ -4,12 +4,12 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -86,36 +86,84 @@ class UserController extends Controller
      * Display User Details
      *
      * @param int $id
+     * @urlParam id integer required User ID
      * @return JsonResponse
      * @authenticated
      */
-    public function show($id): JsonResponse
+    public function show(int $id): JsonResponse
     {
-        //
+        try{
+            $user = User::with('customers')->find($id);
+            if(!$user){
+                return $this->commonResponse(false,'User Not Found','',Response::HTTP_NOT_FOUND);
+            }
+            return $this->commonResponse(true,'User Details',new UserResource($user),Response::HTTP_OK);
+        }catch (QueryException $exception){
+            return $this->commonResponse(false,$exception->errorInfo[2],'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not fetch user details. ERROR: '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
      * Update User Details
      *
-     * @param Request $request
+     * @param UserUpdateRequest $request
      * @param int $id
+     * @bodyParam name string required The name of the user
+     * @bodyParam email string required The email of the user
+     * @urlParam id integer required The User ID.
      * @return JsonResponse
      * @authenticated
      */
-    public function update(Request $request, $id): JsonResponse
+    public function update(UserUpdateRequest $request, int $id): JsonResponse
     {
-        //
+        $validator = Validator::make($request->all(), $request->rules());
+        if($validator->fails()){
+            return $this->commonResponse(false,Arr::flatten($validator->messages()->get('*')),'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        try{
+            $user = User::with('customers')->find($id);
+            if(!$user){
+                return $this->commonResponse(false,'User Not Found','',Response::HTTP_NOT_FOUND);
+            }
+            if($user->update($request->validated())){
+                return $this->commonResponse(true,'User Details Updated Successfully', new UserResource($user),Response::HTTP_OK);
+            }
+            return $this->commonResponse(false,'Failed to update user details','',Response::HTTP_EXPECTATION_FAILED);
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false,$queryException->errorInfo[2],'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not update user details. ERROR: '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
      * Delete User
      *
      * @param int $id
+     * @urlParam id integer required The ID of the User
      * @return JsonResponse
      * @authenticated
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
-        //
+        try{
+            $user = User::with('customers')->find($id);
+            if(!$user){
+                return $this->commonResponse(false,'User Not Found','', Response::HTTP_NOT_FOUND);
+            }
+            if($user->delete()){
+                return $this->commonResponse(true,'User Deleted Successfully','',Response::HTTP_OK);
+            }
+            return $this->commonResponse(false,'Failed to delete user','',Response::HTTP_EXPECTATION_FAILED);
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false,$queryException->errorInfo[2],'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not delete user. ERROR: '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

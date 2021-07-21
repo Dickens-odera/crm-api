@@ -4,13 +4,13 @@ namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CustomerRequest;
+use App\Http\Requests\CustomerUpdateRequest;
 use App\Http\Resources\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Exception;
-use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -86,12 +86,12 @@ class CustomerController extends Controller
     /**
      * Display Customer Details
      *
-     * @param $id
+     * @param int $id
      * @urlParam id integer required The Customer ID.
      * @return JsonResponse
      * @authenticated
      */
-    public function show($id): JsonResponse
+    public function show(int $id): JsonResponse
     {
         $customer = Customer::with('owner','updator')->find($id);
         try{
@@ -110,19 +110,23 @@ class CustomerController extends Controller
     /**
      * Update Customer
      *
-     * @param Request $request
-     * @param $id
+     * @param CustomerUpdateRequest $request
+     * @param int $id
+     * @return JsonResponse
      * @bodyParam name string required .The Customer's name
      * @bodyParam surname string required . The Customer's surname
      * @bodyParam photo_url file The new customer's photo
      * @urlParam id integer required Customer ID. Example 1
-     * @return JsonResponse
      * @authenticated
      */
-    public function update(Request $request,$id): JsonResponse
+    public function update(CustomerUpdateRequest $request,int $id): JsonResponse
     {
-        $customer = Customer::with('owner','updator')->find($id);
+        $validator = Validator::make($request->all(),$request->rules());
+        if($validator->fails()){
+            return $this->commonResponse(false,Arr::flatten($validator->messages()->get('*')),'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
         try{
+            $customer = Customer::with('owner','updator')->find($id);
             if(!$customer){
                 return $this->commonResponse(false,'Customer Not Found','',Response::HTTP_NOT_FOUND);
             }
@@ -154,12 +158,12 @@ class CustomerController extends Controller
     /**
      * Delete Customer
      *
-     * @param $id
+     * @param int $id
      * @urlParam id integer required The Customer ID Example:1
      * @return JsonResponse
      * @authenticated
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): JsonResponse
     {
         try{
             $customer = Customer::with('owner','updator')->find($id);
