@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\v1\CustomerController;
 use App\Http\Controllers\api\v1\UserController;
 use App\Http\Controllers\api\v1\AuthController;
+use App\Http\Controllers\api\v1\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -44,5 +45,12 @@ Route::group(['prefix' => 'v1'], function(){
             Route::patch('/{id}/update',[UserController::class,'update']);
             Route::delete('/{id}/delete',[UserController::class,'destroy']);
         });
+        //user profile management
+        Route::group(['prefix' => 'user/profile'], function(){
+            Route::get('/',[ProfileController::class,'profile']);
+            Route::patch('/update',[ProfileController::class,'update']);
+        });
+        //Roles and Permissions
+
     });
 });
