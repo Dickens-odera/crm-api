@@ -69,7 +69,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">http://localhost:8000</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
 
@@ -94,10 +94,10 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"vero\",
-    \"email\": \"aut\",
-    \"password\": \"consequatur\",
-    \"confirm_password\": \"aut\"
+    \"name\": \"aliquam\",
+    \"email\": \"quibusdam\",
+    \"password\": \"corrupti\",
+    \"confirm_password\": \"magni\"
 }"
 </code></pre>
 
@@ -112,10 +112,10 @@ const headers = {
 };
 
 let body = {
-    "name": "vero",
-    "email": "aut",
-    "password": "consequatur",
-    "confirm_password": "aut"
+    "name": "aliquam",
+    "email": "quibusdam",
+    "password": "corrupti",
+    "confirm_password": "magni"
 }
 
 fetch(url, {
@@ -133,10 +133,10 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'vero',
-            'email' =&gt; 'aut',
-            'password' =&gt; 'consequatur',
-            'confirm_password' =&gt; 'aut',
+            'name' =&gt; 'aliquam',
+            'email' =&gt; 'quibusdam',
+            'password' =&gt; 'corrupti',
+            'confirm_password' =&gt; 'magni',
         ],
     ]
 );
@@ -238,8 +238,8 @@ print_r(json_decode((string) $body));</code></pre>
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"email\": \"libero\",
-    \"password\": \"aut\"
+    \"email\": \"ullam\",
+    \"password\": \"eligendi\"
 }"
 </code></pre>
 
@@ -254,8 +254,8 @@ const headers = {
 };
 
 let body = {
-    "email": "libero",
-    "password": "aut"
+    "email": "ullam",
+    "password": "eligendi"
 }
 
 fetch(url, {
@@ -273,8 +273,8 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'email' =&gt; 'libero',
-            'password' =&gt; 'aut',
+            'email' =&gt; 'ullam',
+            'password' =&gt; 'eligendi',
         ],
     ]
 );
@@ -584,9 +584,9 @@ access-control-allow-origin: *
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
-    --form "name=vero" \
-    --form "surname=quo" \
-    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\php67DA.tmp" </code></pre>
+    --form "name=id" \
+    --form "surname=sapiente" \
+    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\phpF210.tmp" </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/v1/customers/create"
@@ -600,8 +600,8 @@ const headers = {
 };
 
 const body = new FormData();
-body.append('name', 'vero');
-body.append('surname', 'quo');
+body.append('name', 'id');
+body.append('surname', 'sapiente');
 body.append('photo_url', document.querySelector('input[name="photo_url"]').files[0]);
 
 fetch(url, {
@@ -622,15 +622,15 @@ $response = $client-&gt;post(
         'multipart' =&gt; [
             [
                 'name' =&gt; 'name',
-                'contents' =&gt; 'vero'
+                'contents' =&gt; 'id'
             ],
             [
                 'name' =&gt; 'surname',
-                'contents' =&gt; 'quo'
+                'contents' =&gt; 'sapiente'
             ],
             [
                 'name' =&gt; 'photo_url',
-                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\php67DA.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\phpF210.tmp', 'r')
             ],
         ],
     ]
@@ -716,226 +716,6 @@ print_r(json_decode((string) $body));</code></pre>
     
     </form>
 
-            <h2 id="customers-PATCHapi-v1-customers--customer--update">Update Customer</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-PATCHapi-v1-customers--customer--update">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request PATCH \
-    "http://localhost:8000/api/v1/customers/8/update" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --header "Access-Control-Allow-Origin: *"</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/customers/8/update"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Access-Control-Allow-Origin": "*",
-};
-
-fetch(url, {
-    method: "PATCH",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;patch(
-    'http://localhost:8000/api/v1/customers/8/update',
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
-            'Accept' =&gt; 'application/json',
-            'Access-Control-Allow-Origin' =&gt; '*',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-</span>
-
-<span id="example-responses-PATCHapi-v1-customers--customer--update">
-</span>
-<span id="execution-results-PATCHapi-v1-customers--customer--update" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-PATCHapi-v1-customers--customer--update"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-PATCHapi-v1-customers--customer--update"></code></pre>
-</span>
-<span id="execution-error-PATCHapi-v1-customers--customer--update" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-PATCHapi-v1-customers--customer--update"></code></pre>
-</span>
-<form id="form-PATCHapi-v1-customers--customer--update" data-method="PATCH"
-      data-path="api/v1/customers/{customer}/update"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-v1-customers--customer--update', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-PATCHapi-v1-customers--customer--update"
-                    onclick="tryItOut('PATCHapi-v1-customers--customer--update');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-PATCHapi-v1-customers--customer--update"
-                    onclick="cancelTryOut('PATCHapi-v1-customers--customer--update');" hidden>Cancel
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-PATCHapi-v1-customers--customer--update" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-purple">PATCH</small>
-            <b><code>api/v1/customers/{customer}/update</code></b>
-        </p>
-                <p>
-            <label id="auth-PATCHapi-v1-customers--customer--update" hidden>Authorization header:
-                <b><code>Bearer </code></b><input type="text"
-                                                                name="Authorization"
-                                                                data-prefix="Bearer "
-                                                                data-endpoint="PATCHapi-v1-customers--customer--update"
-                                                                data-component="header"></label>
-        </p>
-                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <p>
-                <b><code>customer</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="customer"
-               data-endpoint="PATCHapi-v1-customers--customer--update"
-               data-component="url" required  hidden>
-    <br>
-            </p>
-                    </form>
-
-            <h2 id="customers-DELETEapi-v1-customers--customer--delete">Delete Customer</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-DELETEapi-v1-customers--customer--delete">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/customers/14/delete" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --header "Access-Control-Allow-Origin: *"</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/customers/14/delete"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Access-Control-Allow-Origin": "*",
-};
-
-fetch(url, {
-    method: "DELETE",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;delete(
-    'http://localhost:8000/api/v1/customers/14/delete',
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
-            'Accept' =&gt; 'application/json',
-            'Access-Control-Allow-Origin' =&gt; '*',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-</span>
-
-<span id="example-responses-DELETEapi-v1-customers--customer--delete">
-</span>
-<span id="execution-results-DELETEapi-v1-customers--customer--delete" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-DELETEapi-v1-customers--customer--delete"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-DELETEapi-v1-customers--customer--delete"></code></pre>
-</span>
-<span id="execution-error-DELETEapi-v1-customers--customer--delete" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-DELETEapi-v1-customers--customer--delete"></code></pre>
-</span>
-<form id="form-DELETEapi-v1-customers--customer--delete" data-method="DELETE"
-      data-path="api/v1/customers/{customer}/delete"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-customers--customer--delete', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-DELETEapi-v1-customers--customer--delete"
-                    onclick="tryItOut('DELETEapi-v1-customers--customer--delete');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-DELETEapi-v1-customers--customer--delete"
-                    onclick="cancelTryOut('DELETEapi-v1-customers--customer--delete');" hidden>Cancel
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-DELETEapi-v1-customers--customer--delete" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-red">DELETE</small>
-            <b><code>api/v1/customers/{customer}/delete</code></b>
-        </p>
-                <p>
-            <label id="auth-DELETEapi-v1-customers--customer--delete" hidden>Authorization header:
-                <b><code>Bearer </code></b><input type="text"
-                                                                name="Authorization"
-                                                                data-prefix="Bearer "
-                                                                data-endpoint="DELETEapi-v1-customers--customer--delete"
-                                                                data-component="header"></label>
-        </p>
-                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <p>
-                <b><code>customer</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="customer"
-               data-endpoint="DELETEapi-v1-customers--customer--delete"
-               data-component="url" required  hidden>
-    <br>
-            </p>
-                    </form>
-
             <h2 id="customers-GETapi-v1-customers--id--details">Display Customer Details</h2>
 
 <p>
@@ -949,14 +729,14 @@ print_r(json_decode((string) $body));</code></pre>
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/customers/19/details" \
+    --get "http://localhost:8000/api/v1/customers/11/details" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/customers/19/details"
+    "http://localhost:8000/api/v1/customers/11/details"
 );
 
 const headers = {
@@ -973,7 +753,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/api/v1/customers/19/details',
+    'http://localhost:8000/api/v1/customers/11/details',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1061,6 +841,275 @@ access-control-allow-origin: *
                data-component="url" required  hidden>
     <br>
 <p>The Customer ID.</p>            </p>
+                    </form>
+
+            <h2 id="customers-PATCHapi-v1-customers--id--update">Update Customer</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PATCHapi-v1-customers--id--update">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request PATCH \
+    "http://localhost:8000/api/v1/customers/13/update" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: multipart/form-data" \
+    --header "Accept: application/json" \
+    --header "Access-Control-Allow-Origin: *" \
+    --form "name=corrupti" \
+    --form "surname=sint" \
+    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\phpF220.tmp" </code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/customers/13/update"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "multipart/form-data",
+    "Accept": "application/json",
+    "Access-Control-Allow-Origin": "*",
+};
+
+const body = new FormData();
+body.append('name', 'corrupti');
+body.append('surname', 'sint');
+body.append('photo_url', document.querySelector('input[name="photo_url"]').files[0]);
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+    body,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;patch(
+    'http://localhost:8000/api/v1/customers/13/update',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Accept' =&gt; 'application/json',
+            'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+        'multipart' =&gt; [
+            [
+                'name' =&gt; 'name',
+                'contents' =&gt; 'corrupti'
+            ],
+            [
+                'name' =&gt; 'surname',
+                'contents' =&gt; 'sint'
+            ],
+            [
+                'name' =&gt; 'photo_url',
+                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\phpF220.tmp', 'r')
+            ],
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+</span>
+
+<span id="example-responses-PATCHapi-v1-customers--id--update">
+</span>
+<span id="execution-results-PATCHapi-v1-customers--id--update" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-v1-customers--id--update"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-v1-customers--id--update"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-v1-customers--id--update" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-v1-customers--id--update"></code></pre>
+</span>
+<form id="form-PATCHapi-v1-customers--id--update" data-method="PATCH"
+      data-path="api/v1/customers/{id}/update"
+      data-authed="1"
+      data-hasfiles="1"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"multipart\/form-data","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-v1-customers--id--update', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-v1-customers--id--update"
+                    onclick="tryItOut('PATCHapi-v1-customers--id--update');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-v1-customers--id--update"
+                    onclick="cancelTryOut('PATCHapi-v1-customers--id--update');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-v1-customers--id--update" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/customers/{id}/update</code></b>
+        </p>
+                <p>
+            <label id="auth-PATCHapi-v1-customers--id--update" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="PATCHapi-v1-customers--id--update"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="PATCHapi-v1-customers--id--update"
+               data-component="url" required  hidden>
+    <br>
+<p>Customer ID. Example 1</p>            </p>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="PATCHapi-v1-customers--id--update"
+               data-component="body" required  hidden>
+    <br>
+<p>.The Customer's name</p>        </p>
+                <p>
+            <b><code>surname</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="surname"
+               data-endpoint="PATCHapi-v1-customers--id--update"
+               data-component="body" required  hidden>
+    <br>
+<p>. The Customer's surname</p>        </p>
+                <p>
+            <b><code>photo_url</code></b>&nbsp;&nbsp;<small>file</small>     <i>optional</i> &nbsp;
+                <input type="file"
+               name="photo_url"
+               data-endpoint="PATCHapi-v1-customers--id--update"
+               data-component="body"  hidden>
+    <br>
+<p>The new customer's photo</p>        </p>
+    
+    </form>
+
+            <h2 id="customers-DELETEapi-v1-customers--id--delete">Delete Customer</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-customers--id--delete">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request DELETE \
+    "http://localhost:8000/api/v1/customers/1/delete" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --header "Access-Control-Allow-Origin: *"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/customers/1/delete"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Access-Control-Allow-Origin": "*",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'http://localhost:8000/api/v1/customers/1/delete',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Accept' =&gt; 'application/json',
+            'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+</span>
+
+<span id="example-responses-DELETEapi-v1-customers--id--delete">
+</span>
+<span id="execution-results-DELETEapi-v1-customers--id--delete" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-customers--id--delete"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-customers--id--delete"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-customers--id--delete" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-customers--id--delete"></code></pre>
+</span>
+<form id="form-DELETEapi-v1-customers--id--delete" data-method="DELETE"
+      data-path="api/v1/customers/{id}/delete"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-customers--id--delete', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-customers--id--delete"
+                    onclick="tryItOut('DELETEapi-v1-customers--id--delete');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-customers--id--delete"
+                    onclick="cancelTryOut('DELETEapi-v1-customers--id--delete');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-customers--id--delete" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/customers/{id}/delete</code></b>
+        </p>
+                <p>
+            <label id="auth-DELETEapi-v1-customers--id--delete" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="DELETEapi-v1-customers--id--delete"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="DELETEapi-v1-customers--id--delete"
+               data-component="url" required  hidden>
+    <br>
+<p>The Customer ID</p>            </p>
                     </form>
 
     
