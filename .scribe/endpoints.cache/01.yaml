@@ -49,13 +49,13 @@ endpoints:
         name: name
         description: 'Customer''s Name.'
         required: true
-        example: aut
+        example: nisi
         type: string
       surname:
         name: surname
         description: 'Customer''s Surname.'
         required: true
-        example: est
+        example: nostrum
         type: string
       photo_url:
         name: photo_url
@@ -115,7 +115,7 @@ endpoints:
         name: id
         description: 'Customer ID. Example 1'
         required: true
-        example: 18
+        example: 20
         type: integer
     queryParameters: []
     bodyParameters:
@@ -123,13 +123,13 @@ endpoints:
         name: name
         description: '.The Customer''s name'
         required: true
-        example: perspiciatis
+        example: distinctio
         type: string
       surname:
         name: surname
         description: '. The Customer''s surname'
         required: true
-        example: eum
+        example: et
         type: string
       photo_url:
         name: photo_url

@@ -32,7 +32,7 @@ class CustomerController extends Controller
     public function index(): JsonResponse
     {
         try{
-            $customers = Customer::with('owner','updator')->paginate(10);
+            $customers = Customer::with('owner','updator')->latest()->paginate(10);
             if($customers->isEmpty()){
                 return $this->commonResponse(false,'Customers Not Found','', Response::HTTP_NOT_FOUND);
             }

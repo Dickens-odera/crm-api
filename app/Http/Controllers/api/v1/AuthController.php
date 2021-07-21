@@ -29,7 +29,7 @@ class AuthController extends Controller
      * @bodyParam  name string required The name of the user.
      * @bodyParam  email string required The email address of the user.
      * @bodyParam  password password required  Password.
-     * @bodyParam  confirm_password password required Password confirmation.
+     * @bodyParam password_confirmation password required Password Confirmation
      * @return JsonResponse
      */
     public function register(UserRequest $request): JsonResponse
