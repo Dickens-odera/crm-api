@@ -29,9 +29,9 @@ Route::group(['prefix' => 'v1'], function(){
     Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'customers'], function(){
         //Route::resource('customers',CustomerController::class);
         Route::get('/',[CustomerController::class,'index']);
-        Route::get('/{customer}',[CustomerController::class,'show']);
+        Route::get('/{id}/details',[CustomerController::class,'show']);
         Route::post('/create',[CustomerController::class,'store']);
-        Route::patch('/{customer}/update',[CustomerController::class,'update']);
-        Route::delete('/{customer}/delete',[CustomerController::class,'destroy']);
+        Route::patch('/{id}/update',[CustomerController::class,'update']);
+        Route::delete('/{id}/delete',[CustomerController::class,'destroy']);
     });
 });

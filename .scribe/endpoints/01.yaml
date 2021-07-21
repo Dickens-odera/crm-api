@@ -29,38 +29,6 @@ endpoints:
     responseFields: []
   -
     httpMethods:
-      - GET
-    uri: 'api/v1/customers/{customer}'
-    metadata:
-      title: 'Display Customer Details'
-      description: ''
-      authenticated: true
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Access-Control-Allow-Origin: '*'
-    urlParameters:
-      customer:
-        name: customer
-        description: ''
-        required: true
-        example: 18
-        type: integer
-    queryParameters: []
-    bodyParameters: []
-    responses:
-      -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-  -
-    httpMethods:
       - POST
     uri: api/v1/customers/create
     metadata:
@@ -79,13 +47,13 @@ endpoints:
         name: name
         description: 'Customer''s Name.'
         required: true
-        example: sed
+        example: vero
         type: string
       surname:
         name: surname
         description: 'Customer''s Surname.'
         required: true
-        example: numquam
+        example: quo
         type: string
       photo_url:
         name: photo_url
@@ -113,7 +81,7 @@ endpoints:
         name: customer
         description: ''
         required: true
-        example: 11
+        example: 8
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -137,9 +105,41 @@ endpoints:
         name: customer
         description: ''
         required: true
-        example: 11
+        example: 14
         type: integer
     queryParameters: []
     bodyParameters: []
     responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/customers/{id}/details'
+    metadata:
+      title: 'Display Customer Details'
+      description: ''
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Access-Control-Allow-Origin: '*'
+    urlParameters:
+      id:
+        name: id
+        description: 'The Customer ID.'
+        required: true
+        example: 19
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
     responseFields: []

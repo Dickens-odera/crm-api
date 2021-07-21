@@ -10,6 +10,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
@@ -84,13 +85,25 @@ class CustomerController extends Controller
     /**
      * Display Customer Details
      *
-     * @param Customer $customer
+     * @param $id
+     * @urlParam id integer required The Customer ID.
      * @return JsonResponse
      * @authenticated
      */
-    public function show(Customer $customer): JsonResponse
+    public function show($id): JsonResponse
     {
-        //
+        $customer = Customer::find($id);
+        try{
+            if($customer){
+                return $this->commonResponse(true,'Customer Details', new CustomerResource($customer->load('owner','updator')),Response::HTTP_OK);
+            }
+            return $this->commonResponse(false,'Customer Not Found','',Response::HTTP_NOT_FOUND);
+        }catch (QueryException $exception){
+            return $this->commonResponse(false, $exception->errorInfo[2], '', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not fetch customer details. ERROR '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
