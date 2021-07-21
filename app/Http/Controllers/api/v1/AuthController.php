@@ -109,7 +109,7 @@ class AuthController extends Controller
             if($user->tokens()->delete()){
                 return $this->commonResponse(true,'Logout Successful','',Response::HTTP_OK);
             }
-            return $this->commonResponse(true,'Failed to logout','',Response::HTTP_EXPECTATION_FAILED);
+            return $this->commonResponse(false,'Failed to logout','',Response::HTTP_EXPECTATION_FAILED);
         }catch (Exception $exception){
             Log::critical('Failed to perform user logout. ERROR '.$exception->getTraceAsString());
             return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
