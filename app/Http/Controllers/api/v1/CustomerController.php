@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
+ * Customer Management
  * @group Customers
  * Class CustomerController
  * @package App\Http\Controllers\api\v1

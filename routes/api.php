@@ -25,13 +25,24 @@ Route::group(['prefix' => 'v1'], function(){
             Route::post('/logout',[AuthController::class,'logout']);
        });
     });
-    //customer routes
-    Route::group(['middleware' => 'auth:sanctum', 'prefix' => 'customers'], function(){
-        //Route::resource('customers',CustomerController::class);
-        Route::get('/',[CustomerController::class,'index']);
-        Route::get('/{id}/details',[CustomerController::class,'show']);
-        Route::post('/create',[CustomerController::class,'store']);
-        Route::patch('/{id}/update',[CustomerController::class,'update']);
-        Route::delete('/{id}/delete',[CustomerController::class,'destroy']);
+
+    Route::group(['middleware' => 'auth:sanctum'], function(){
+        //customer management
+        Route::group(['prefix' => 'customers'], function(){
+            //Route::resource('customers',CustomerController::class);
+            Route::get('/',[CustomerController::class,'index']);
+            Route::get('/{id}/details',[CustomerController::class,'show']);
+            Route::post('/create',[CustomerController::class,'store']);
+            Route::patch('/{id}/update',[CustomerController::class,'update']);
+            Route::delete('/{id}/delete',[CustomerController::class,'destroy']);
+        });
+        //user management
+        Route::group(['prefix' => 'users'], function(){
+            Route::get('/',[UserController::class,'index']);
+            Route::get('/{id}/details',[UserController::class,'show']);
+            Route::post('/create',[UserController::class,'store']);
+            Route::patch('/{id}/update',[UserController::class,'update']);
+            Route::delete('/{id}/delete',[UserController::class,'destroy']);
+        });
     });
 });
