@@ -69,7 +69,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">http://localhost:8000</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
 
@@ -94,10 +94,10 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"voluptas\",
-    \"email\": \"amet\",
-    \"password\": \"molestias\",
-    \"confirm_password\": \"culpa\"
+    \"name\": \"vero\",
+    \"email\": \"aut\",
+    \"password\": \"consequatur\",
+    \"confirm_password\": \"aut\"
 }"
 </code></pre>
 
@@ -112,10 +112,10 @@ const headers = {
 };
 
 let body = {
-    "name": "voluptas",
-    "email": "amet",
-    "password": "molestias",
-    "confirm_password": "culpa"
+    "name": "vero",
+    "email": "aut",
+    "password": "consequatur",
+    "confirm_password": "aut"
 }
 
 fetch(url, {
@@ -133,10 +133,10 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'voluptas',
-            'email' =&gt; 'amet',
-            'password' =&gt; 'molestias',
-            'confirm_password' =&gt; 'culpa',
+            'name' =&gt; 'vero',
+            'email' =&gt; 'aut',
+            'password' =&gt; 'consequatur',
+            'confirm_password' =&gt; 'aut',
         ],
     ]
 );
@@ -238,8 +238,8 @@ print_r(json_decode((string) $body));</code></pre>
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"email\": \"quisquam\",
-    \"password\": \"enim\"
+    \"email\": \"libero\",
+    \"password\": \"aut\"
 }"
 </code></pre>
 
@@ -254,8 +254,8 @@ const headers = {
 };
 
 let body = {
-    "email": "quisquam",
-    "password": "enim"
+    "email": "libero",
+    "password": "aut"
 }
 
 fetch(url, {
@@ -273,8 +273,8 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'email' =&gt; 'quisquam',
-            'password' =&gt; 'enim',
+            'email' =&gt; 'libero',
+            'password' =&gt; 'aut',
         ],
     ]
 );
@@ -566,133 +566,6 @@ access-control-allow-origin: *
         </p>
                 </form>
 
-            <h2 id="customers-GETapi-v1-customers--customer-">Display Customer Details</h2>
-
-<p>
-<small class="badge badge-darkred">requires authentication</small>
-</p>
-
-
-
-<span id="example-requests-GETapi-v1-customers--customer-">
-<blockquote>Example request:</blockquote>
-
-
-<pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/customers/18" \
-    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
-    --header "Content-Type: application/json" \
-    --header "Accept: application/json" \
-    --header "Access-Control-Allow-Origin: *"</code></pre>
-
-<pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/customers/18"
-);
-
-const headers = {
-    "Authorization": "Bearer {YOUR_AUTH_KEY}",
-    "Content-Type": "application/json",
-    "Accept": "application/json",
-    "Access-Control-Allow-Origin": "*",
-};
-
-fetch(url, {
-    method: "GET",
-    headers,
-}).then(response =&gt; response.json());</code></pre>
-
-<pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;get(
-    'http://localhost:8000/api/v1/customers/18',
-    [
-        'headers' =&gt; [
-            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
-            'Accept' =&gt; 'application/json',
-            'Access-Control-Allow-Origin' =&gt; '*',
-        ],
-    ]
-);
-$body = $response-&gt;getBody();
-print_r(json_decode((string) $body));</code></pre>
-</span>
-
-<span id="example-responses-GETapi-v1-customers--customer-">
-            <blockquote>
-            <p>Example response (401):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre>
-        </details>         <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-v1-customers--customer-" hidden>
-    <blockquote>Received response<span
-                id="execution-response-status-GETapi-v1-customers--customer-"></span>:
-    </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-v1-customers--customer-"></code></pre>
-</span>
-<span id="execution-error-GETapi-v1-customers--customer-" hidden>
-    <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-v1-customers--customer-"></code></pre>
-</span>
-<form id="form-GETapi-v1-customers--customer-" data-method="GET"
-      data-path="api/v1/customers/{customer}"
-      data-authed="1"
-      data-hasfiles="0"
-      data-isarraybody="0"
-      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
-      autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-customers--customer-', this);">
-    <h3>
-        Request&nbsp;&nbsp;&nbsp;
-                    <button type="button"
-                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-v1-customers--customer-"
-                    onclick="tryItOut('GETapi-v1-customers--customer-');">Try it out ⚡
-            </button>
-            <button type="button"
-                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-v1-customers--customer-"
-                    onclick="cancelTryOut('GETapi-v1-customers--customer-');" hidden>Cancel
-            </button>&nbsp;&nbsp;
-            <button type="submit"
-                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-v1-customers--customer-" hidden>Send Request 💥
-            </button>
-            </h3>
-            <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/v1/customers/{customer}</code></b>
-        </p>
-                <p>
-            <label id="auth-GETapi-v1-customers--customer-" hidden>Authorization header:
-                <b><code>Bearer </code></b><input type="text"
-                                                                name="Authorization"
-                                                                data-prefix="Bearer "
-                                                                data-endpoint="GETapi-v1-customers--customer-"
-                                                                data-component="header"></label>
-        </p>
-                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
-                    <p>
-                <b><code>customer</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
-                <input type="number"
-               name="customer"
-               data-endpoint="GETapi-v1-customers--customer-"
-               data-component="url" required  hidden>
-    <br>
-            </p>
-                    </form>
-
             <h2 id="customers-POSTapi-v1-customers-create">Create New Customer</h2>
 
 <p>
@@ -711,9 +584,9 @@ access-control-allow-origin: *
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
-    --form "name=sed" \
-    --form "surname=numquam" \
-    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\php60E4.tmp" </code></pre>
+    --form "name=vero" \
+    --form "surname=quo" \
+    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\php67DA.tmp" </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/v1/customers/create"
@@ -727,8 +600,8 @@ const headers = {
 };
 
 const body = new FormData();
-body.append('name', 'sed');
-body.append('surname', 'numquam');
+body.append('name', 'vero');
+body.append('surname', 'quo');
 body.append('photo_url', document.querySelector('input[name="photo_url"]').files[0]);
 
 fetch(url, {
@@ -749,15 +622,15 @@ $response = $client-&gt;post(
         'multipart' =&gt; [
             [
                 'name' =&gt; 'name',
-                'contents' =&gt; 'sed'
+                'contents' =&gt; 'vero'
             ],
             [
                 'name' =&gt; 'surname',
-                'contents' =&gt; 'numquam'
+                'contents' =&gt; 'quo'
             ],
             [
                 'name' =&gt; 'photo_url',
-                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\php60E4.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\php67DA.tmp', 'r')
             ],
         ],
     ]
@@ -856,14 +729,14 @@ print_r(json_decode((string) $body));</code></pre>
 
 
 <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost:8000/api/v1/customers/11/update" \
+    "http://localhost:8000/api/v1/customers/8/update" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/customers/11/update"
+    "http://localhost:8000/api/v1/customers/8/update"
 );
 
 const headers = {
@@ -880,7 +753,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;patch(
-    'http://localhost:8000/api/v1/customers/11/update',
+    'http://localhost:8000/api/v1/customers/8/update',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -966,14 +839,14 @@ print_r(json_decode((string) $body));</code></pre>
 
 
 <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/customers/11/delete" \
+    "http://localhost:8000/api/v1/customers/14/delete" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/customers/11/delete"
+    "http://localhost:8000/api/v1/customers/14/delete"
 );
 
 const headers = {
@@ -990,7 +863,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost:8000/api/v1/customers/11/delete',
+    'http://localhost:8000/api/v1/customers/14/delete',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1061,6 +934,133 @@ print_r(json_decode((string) $body));</code></pre>
                data-component="url" required  hidden>
     <br>
             </p>
+                    </form>
+
+            <h2 id="customers-GETapi-v1-customers--id--details">Display Customer Details</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-customers--id--details">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/api/v1/customers/19/details" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --header "Access-Control-Allow-Origin: *"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/customers/19/details"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Access-Control-Allow-Origin": "*",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost:8000/api/v1/customers/19/details',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Accept' =&gt; 'application/json',
+            'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+</span>
+
+<span id="example-responses-GETapi-v1-customers--id--details">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-customers--id--details" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-customers--id--details"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-customers--id--details"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-customers--id--details" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-customers--id--details"></code></pre>
+</span>
+<form id="form-GETapi-v1-customers--id--details" data-method="GET"
+      data-path="api/v1/customers/{id}/details"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-customers--id--details', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-customers--id--details"
+                    onclick="tryItOut('GETapi-v1-customers--id--details');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-customers--id--details"
+                    onclick="cancelTryOut('GETapi-v1-customers--id--details');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-customers--id--details" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/customers/{id}/details</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-v1-customers--id--details" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-v1-customers--id--details"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="GETapi-v1-customers--id--details"
+               data-component="url" required  hidden>
+    <br>
+<p>The Customer ID.</p>            </p>
                     </form>
 
     
