@@ -1,12 +1,12 @@
-name: Permissions
-description: 'Class PermissionController'
+name: Users
+description: 'Class UserController'
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/permissions
+    uri: api/v1/users
     metadata:
-      title: 'List All Permissions'
+      title: 'List All Users'
       description: ''
       authenticated: true
     headers:
@@ -15,6 +15,38 @@ endpoints:
       Accept: application/json
       Access-Control-Allow-Origin: '*'
     urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/users/{id}/details'
+    metadata:
+      title: 'Display User Details'
+      description: ''
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Access-Control-Allow-Origin: '*'
+    urlParameters:
+      id:
+        name: id
+        description: 'User ID'
+        required: true
+        example: 15
+        type: integer
     queryParameters: []
     bodyParameters: []
     responses:
@@ -30,9 +62,9 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/permissions
+    uri: api/v1/users/create
     metadata:
-      title: 'Create New Permission'
+      title: 'Create New User'
       description: ''
       authenticated: true
     headers:
@@ -45,51 +77,36 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: 'Must be at least 4 characters. Must not be greater than 60 characters.'
+        description: 'The User Name'
         required: true
-        example: qknaozrkhjuacnnrncrhjlsdntowqctw
+        example: quis
         type: string
+      email:
+        name: email
+        description: 'User Email'
+        required: true
+        example: debitis
+        type: email
+      password:
+        name: password
+        description: 'User Password'
+        required: true
+        example: consequuntur
+        type: password
+      password_confirmation:
+        name: password_confirmation
+        description: 'Password Confirmation'
+        required: true
+        example: vel
+        type: password
     responses: []
     responseFields: []
   -
     httpMethods:
-      - GET
-    uri: 'api/v1/permissions/{id}'
-    metadata:
-      title: 'Display Permission Details'
-      description: ''
-      authenticated: true
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Access-Control-Allow-Origin: '*'
-    urlParameters:
-      id:
-        name: id
-        description: 'The Permission ID'
-        required: true
-        example: 12
-        type: integer
-    queryParameters: []
-    bodyParameters: []
-    responses:
-      -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-  -
-    httpMethods:
-      - PUT
       - PATCH
-    uri: 'api/v1/permissions/{id}'
+    uri: 'api/v1/users/{id}/update'
     metadata:
-      title: 'Update Permission'
+      title: 'Update User Details'
       description: ''
       authenticated: true
     headers:
@@ -100,26 +117,32 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The Permission ID'
+        description: 'The User ID.'
         required: true
-        example: 17
+        example: 20
         type: integer
     queryParameters: []
     bodyParameters:
       name:
         name: name
-        description: 'The Permission Name'
+        description: 'The name of the user'
         required: true
-        example: eaque
+        example: ut
+        type: string
+      email:
+        name: email
+        description: 'The email of the user'
+        required: true
+        example: autem
         type: string
     responses: []
     responseFields: []
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/permissions/{id}'
+    uri: 'api/v1/users/{id}/delete'
     metadata:
-      title: 'Delete Permission'
+      title: 'Delete User'
       description: ''
       authenticated: true
     headers:
@@ -130,9 +153,9 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The Permission ID.'
+        description: 'The ID of the User'
         required: true
-        example: 3
+        example: 13
         type: integer
     queryParameters: []
     bodyParameters: []

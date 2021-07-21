@@ -3,83 +3,158 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
+use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Log;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use App\Http\Requests\RoleRequest;
+use App\Http\Requests\RoleUpdateRequest;
+use App\Http\Requests\PermissionRequest;
+use App\Http\Resources\RoleResource;
+use App\Http\Resources\PermissionResource;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
+/** Role Management
+ * @group Roles
+ * Class RoleController
+ * @package App\Http\Controllers\api\v1
+ */
 class RoleController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * List All Roles
+     * @return JsonResponse
+     * @authenticated
      */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
+        try{
+            $roles = Role::latest()->paginate(10);
+            if($roles->isEmpty()){
+                return $this->commonResponse(false,'User Roles Not Found','', Response::HTTP_NOT_FOUND);
+            }
+            return $this->commonResponse(true,'User Roles', RoleResource::collection($roles)->response()->getData(true),Response::HTTP_OK);
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false,$queryException->errorInfo[2],'', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not fetch the list of roles. ERROR: '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create New Role
      *
-     * @return \Illuminate\Http\Response
+     * @param RoleRequest $request
+     * @bodyParam name string required Role Name.
+     * @return JsonResponse
+     * @authenticated
      */
-    public function create()
+    public function store(RoleRequest $request): JsonResponse
     {
-        //
+        $validator = Validator::make($request->all(), $request->rules());
+        if($validator->fails()){
+            return $this->commonResponse(false, Arr::flatten($validator->messages()->get('*')),'', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        try{
+            $newRole = Role::create($request->validated());
+            if($newRole){
+                return $this->commonResponse(true,'Role Created Successfully',new RoleResource($newRole), Response::HTTP_CREATED);
+            }
+            return $this->commonResponse(false,'Role Not Created','', Response::HTTP_EXPECTATION_FAILED);
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false, $queryException->errorInfo[2],'', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could Not Create Role. ERROR: '. $exception->getTraceAsString());
+            return $this->commonResponse(false, $exception->getMessage(),'', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display Role Details
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @urlParam id integer required The Role ID
+     * @return JsonResponse
+     * @authenticated
      */
-    public function store(Request $request)
+    public function show(int $id): JsonResponse
     {
-        //
+        try{
+            $role = Role::findById($id);
+            if(!$role){
+                return $this->commonResponse(false,'Role Not Found','', Response::HTTP_NOT_FOUND);
+            }
+            return $this->commonResponse(true,'Role Details', new RoleResource($role),Response::HTTP_OK);
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false,$queryException->errorInfo[2],'', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not fetch role details. ERROR: '. $exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
-     * Display the specified resource.
+     * Update Role
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param RoleUpdateRequest $request
+     * @param int $id
+     * @bodyParam name string required Role Name
+     * @urlParam id integer required The Role ID
+     * @return JsonResponse
+     * @authenticated
      */
-    public function show($id)
+    public function update(RoleUpdateRequest $request,int $id): JsonResponse
     {
-        //
+        $validator = Validator::make($request->all(), $request->rules());
+        if($validator->fails()){
+            return $this->commonResponse(false,Arr::flatten($validator->messages()->get('*')), '', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        try{
+            $role = Role::findById($id);
+            if(!$role){
+                return $this->commonResponse(false,'Role Not Found','', Response::HTTP_NOT_FOUND);
+            }
+            if($role->update($request->validated())){
+                return $this->commonResponse(true,'Role Updated Successfully', new RoleResource($role), Response::HTTP_OK);
+            }
+            return $this->commonResponse(false,'Role Not Updated','', Response::HTTP_EXPECTATION_FAILED);
+        }catch (QueryException $exception){
+            return $this->commonResponse(false,$exception->errorInfo[2],'', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('');
+            return $this->commonResponse(false,$exception->getMessage(),'', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Delete Role
+     * @param int $id
+     * @urlParam id integer required Role ID
+     * @return JsonResponse
+     * @authenticated
      */
-    public function edit($id)
+    public function destroy( int $id ): JsonResponse
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        try{
+            $role = Role::findById($id);
+            if(!$role){
+                return $this->commonResponse(false,'Role Not Found','', Response::HTTP_NOT_FOUND);
+            }
+            if($role->delete()){
+                return $this->commonResponse(true,'Role Deleted Successfully','',Response::HTTP_OK);
+            }
+            return $this->commonResponse(false, 'Role Not Deleted','', Response::HTTP_EXPECTATION_FAILED);
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false, $queryException->errorInfo[2],'', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('');
+            return $this->commonResponse(false, $exception->getMessage(),'', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

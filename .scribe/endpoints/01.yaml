@@ -53,7 +53,7 @@ endpoints:
         name: surname
         description: 'Customer''s Surname.'
         required: true
-        example: earum
+        example: officia
         type: string
       photo_url:
         name: photo_url
@@ -81,7 +81,7 @@ endpoints:
         name: id
         description: 'The Customer ID.'
         required: true
-        example: 9
+        example: 12
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -113,7 +113,7 @@ endpoints:
         name: id
         description: 'Customer ID. Example 1'
         required: true
-        example: 13
+        example: 2
         type: integer
     queryParameters: []
     bodyParameters:
@@ -121,13 +121,13 @@ endpoints:
         name: name
         description: '.The Customer''s name'
         required: true
-        example: voluptatum
+        example: distinctio
         type: string
       surname:
         name: surname
         description: '. The Customer''s surname'
         required: true
-        example: fugiat
+        example: aut
         type: string
       photo_url:
         name: photo_url
