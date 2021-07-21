@@ -49,13 +49,13 @@ endpoints:
         name: name
         description: 'Customer''s Name.'
         required: true
-        example: vero
+        example: id
         type: string
       surname:
         name: surname
         description: 'Customer''s Surname.'
         required: true
-        example: quo
+        example: sapiente
         type: string
       photo_url:
         name: photo_url
@@ -63,54 +63,6 @@ endpoints:
         required: false
         example: null
         type: file
-    responses: []
-    responseFields: []
-  -
-    httpMethods:
-      - PATCH
-    uri: 'api/v1/customers/{customer}/update'
-    metadata:
-      title: 'Update Customer'
-      description: ''
-      authenticated: true
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Access-Control-Allow-Origin: '*'
-    urlParameters:
-      customer:
-        name: customer
-        description: ''
-        required: true
-        example: 8
-        type: integer
-    queryParameters: []
-    bodyParameters: []
-    responses: []
-    responseFields: []
-  -
-    httpMethods:
-      - DELETE
-    uri: 'api/v1/customers/{customer}/delete'
-    metadata:
-      title: 'Delete Customer'
-      description: ''
-      authenticated: true
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Access-Control-Allow-Origin: '*'
-    urlParameters:
-      customer:
-        name: customer
-        description: ''
-        required: true
-        example: 14
-        type: integer
-    queryParameters: []
-    bodyParameters: []
     responses: []
     responseFields: []
   -
@@ -131,7 +83,7 @@ endpoints:
         name: id
         description: 'The Customer ID.'
         required: true
-        example: 19
+        example: 11
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -144,4 +96,70 @@ endpoints:
           content-type: application/json
           access-control-allow-origin: '*'
         description: null
+    responseFields: []
+  -
+    httpMethods:
+      - PATCH
+    uri: 'api/v1/customers/{id}/update'
+    metadata:
+      title: 'Update Customer'
+      description: ''
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: multipart/form-data
+      Accept: application/json
+      Access-Control-Allow-Origin: '*'
+    urlParameters:
+      id:
+        name: id
+        description: 'Customer ID. Example 1'
+        required: true
+        example: 13
+        type: integer
+    queryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: '.The Customer''s name'
+        required: true
+        example: corrupti
+        type: string
+      surname:
+        name: surname
+        description: '. The Customer''s surname'
+        required: true
+        example: sint
+        type: string
+      photo_url:
+        name: photo_url
+        description: 'The new customer''s photo'
+        required: false
+        example: null
+        type: file
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - DELETE
+    uri: 'api/v1/customers/{id}/delete'
+    metadata:
+      title: 'Delete Customer'
+      description: ''
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Access-Control-Allow-Origin: '*'
+    urlParameters:
+      id:
+        name: id
+        description: 'The Customer ID'
+        required: true
+        example: 1
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses: []
     responseFields: []

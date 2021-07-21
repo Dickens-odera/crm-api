@@ -62,7 +62,7 @@ class CustomerController extends Controller
         try{
             $photo_url = null;
             if($request->hasFile('photo_url')){
-                $photo_url = $request->file('photo_url')->store('/customers/avatars/'.$request->name,'s3');
+                $photo_url = $request->file('photo_url')->store('customers/avatars/'.$request->name); //TODO update to s3
             }
             $customerData = [
                 'name' => $request->name,
@@ -92,7 +92,7 @@ class CustomerController extends Controller
      */
     public function show($id): JsonResponse
     {
-        $customer = Customer::find($id);
+        $customer = Customer::with('owner','updator')->find($id);
         try{
             if($customer){
                 return $this->commonResponse(true,'Customer Details', new CustomerResource($customer->load('owner','updator')),Response::HTTP_OK);
@@ -110,24 +110,70 @@ class CustomerController extends Controller
      * Update Customer
      *
      * @param Request $request
-     * @param Customer $customer
+     * @param $id
+     * @bodyParam name string required .The Customer's name
+     * @bodyParam surname string required . The Customer's surname
+     * @bodyParam photo_url file The new customer's photo
+     * @urlParam id integer required Customer ID. Example 1
      * @return JsonResponse
      * @authenticated
      */
-    public function update(Request $request, Customer $customer): JsonResponse
+    public function update(Request $request,$id): JsonResponse
     {
-        //
+        $customer = Customer::with('owner','updator')->find($id);
+        try{
+            if(!$customer){
+                return $this->commonResponse(false,'Customer Not Found','',Response::HTTP_NOT_FOUND);
+            }
+            $photo_url = null;
+            if($request->hasFile('photo_url')){
+                $photo_url = $request->file('photo_url')->store('customers/avatars/'.$request->name); //TODO update to s3
+            }
+            $customerData = [
+                'name' => $request->name,
+                'surname' => $request->surname,
+                'photo_url' => $photo_url ?? $customer->photo_url
+            ];
+            $customerUpdate = $customer->update(array_merge(
+                $customerData,
+                ['updated_by' => $request->user()->id]
+            ));
+            if($customerUpdate){
+                return $this->commonResponse(true,'Customer Updated successfully',new CustomerResource($customer->load('owner','updator')),Response::HTTP_OK);
+            }
+            return $this->commonResponse(false,'Failed to update customer details','',Response::HTTP_EXPECTATION_FAILED);
+        }catch (QueryException $exception){
+            return $this->commonResponse(false,$exception->errorInfo[2],'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not update customer. ERROR '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
      * Delete Customer
      *
-     * @param Customer $customer
+     * @param $id
+     * @urlParam id integer required The Customer ID Example:1
      * @return JsonResponse
      * @authenticated
      */
-    public function destroy(Customer $customer): JsonResponse
+    public function destroy($id): JsonResponse
     {
-        //
+        try{
+            $customer = Customer::with('owner','updator')->find($id);
+            if(!$customer){
+                return $this->commonResponse(false,'Customer Not Found','',Response::HTTP_NOT_FOUND);
+            }
+            if($customer->delete()){
+                return $this->commonResponse(true,'Customer Deleted successfully','',Response::HTTP_OK);
+            }
+            return $this->commonResponse(false,'Failed to delete customer','',Response::HTTP_EXPECTATION_FAILED);
+        }catch (QueryException $exception){
+            return $this->commonResponse(false,$exception->errorInfo[2],'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not delete customer details. ERROR: '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
