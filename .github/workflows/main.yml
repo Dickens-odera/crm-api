@@ -10,10 +10,24 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.operating-system }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        operating-system: [ubuntu-18.04]
+        php-versions: ['7.4']
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php-versions }}
+        extensions: mbstring, dom, fileinfo
+          # optional
+        coverage: xdebug
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
@@ -29,6 +43,9 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
+
+    - name: NPM Install
+      run: npm install
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
