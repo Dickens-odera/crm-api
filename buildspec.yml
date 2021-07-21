@@ -1,0 +1,57 @@
+version: 0.2
+env:
+  variables:
+    DB_CONNECTION: "sqlite"
+    DB_DATABASE: "database/database.sqlite"
+phases:
+  install:
+    runtime-versions:
+      php: 7.3
+    commands:
+      - echo Install composer
+      - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+      - php composer-setup.php --install-dir=/bin --filename=composer
+      - echo Install packages
+      - composer update
+      - composer install
+      - echo Setup sqlite
+      - touch database/database.sqlite
+      - echo ------ Setup Environment Variables Now ------
+      - touch .env
+      - echo APP_NAME=${APP_NAME} >> .env
+      - echo APP_ENV=${APP_ENV} >> .env
+      - echo APP_KEY=${APP_KEY} >> .env
+      - echo APP_DEBUG=${APP_DEBUG} >> .env
+      - echo LOG_CHANNEL=${LOG_CHANNEL} >> .env
+      - echo DB_CONNECTION=${DB_CONNECTION} >> .env
+      - echo DB_HOST=${DB_HOST} >> .env
+      - echo DB_PORT=${DB_PORT} >> .env
+      - echo DB_DATABASE=${DB_DATABASE} >> .env
+      - echo DB_USERNAME=${DB_USERNAME} >> .env
+      - echo DB_PASSWORD=${DB_PASSWORD} >> .env
+      - echo MAIL_MAILER=${MAIL_MAILER} >> .env
+      - echo MAIL_HOST=${MAIL_HOST} >> .env
+      - echo MAIL_PORT=${MAIL_PORT} >> .env
+      - echo MAIL_USERNAME=${MAIL_USERNAME} >> .env
+      - echo MAIL_PASSWORD=${MAIL_PASSWORD} >> .env
+      - echo MAIL_ENCRYPTION=${MAIL_ENCRYPTION} >> .env
+      - echo MAIL_FROM_ADDRESS=${MAIL_FROM_ADDRESS} >> .env
+      - echo MAIL_FROM_NAME=${MAIL_FROM_NAME} >> .env
+      - echo AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} >> .env
+      - echo AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} >> .env
+      - echo AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION} >> .env
+      - echo AWS_BUCKET=${AWS_BUCKET} >> .env
+      - echo AWS_BUCKET_URL=${AWS_BUCKET_URL} >> .env
+
+  build:
+    commands:
+      - echo Run Migration
+      # - php artisan migrate --force
+      - echo Run Test
+      # - ./vendor/bin/phpunit
+  post_build:
+    commands:
+      - echo Build completed on `date`
+artifacts:
+  files:
+    - '**/*'
