@@ -1,12 +1,12 @@
-name: Endpoints
-description: ''
+name: Auth
+description: 'User Authentication'
 endpoints:
   -
     httpMethods:
-      - GET
-    uri: api/user
+      - POST
+    uri: api/v1/auth/register
     metadata:
-      title: ''
+      title: 'Register a new user'
       description: ''
       authenticated: false
     headers:
@@ -15,14 +15,30 @@ endpoints:
       Access-Control-Allow-Origin: '*'
     urlParameters: []
     queryParameters: []
-    bodyParameters: []
-    responses:
-      -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the user.'
+        required: true
+        example: id
+        type: string
+      email:
+        name: email
+        description: 'The email address of the user.'
+        required: true
+        example: eos
+        type: string
+      password:
+        name: password
+        description: Password.
+        required: true
+        example: eos
+        type: password
+      confirm_password:
+        name: confirm_password
+        description: 'Password confirmation.'
+        required: true
+        example: consequatur
+        type: password
+    responses: []
     responseFields: []

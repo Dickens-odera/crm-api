@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Agile Monkeys CMS API</title>
+    <title>Agile Monkeys CRM API</title>
 
     <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
 
@@ -52,14 +52,14 @@
                             <li><a href="http://github.com/knuckleswtf/scribe">Documentation powered by Scribe ✍</a></li>
                     </ul>
             <ul class="toc-footer" id="last-updated">
-            <li>Last updated: July 20 2021</li>
+            <li>Last updated: July 21 2021</li>
         </ul>
 </div>
 <div class="page-wrapper">
     <div class="dark-box"></div>
     <div class="content">
         <h1>Introduction</h1>
-<p>The API powering the Agile Monkeys CMS</p>
+<p>Agile Monkeys CMR API</p>
 <p>This documentation aims to provide all the information you need to work with our API.</p>
 <aside>As you scroll, you'll see code examples for working with the API in different programming languages in the dark area to the right (or as part of the content on mobile).
 You can switch the language used with the tabs at the top right (or from the nav menu at the top left on mobile).</aside>
@@ -69,33 +69,40 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">http://localhost:8000</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>This API is authenticated by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
 
-        <h1 id="endpoints">Endpoints</h1>
+        <h1 id="auth">Auth</h1>
 
-    
+    <p>User Authentication</p>
 
-            <h2 id="endpoints-GETapi-user">GET api/user</h2>
+            <h2 id="auth-POSTapi-v1-auth-register">Register a new user</h2>
 
 <p>
 </p>
 
 
 
-<span id="example-requests-GETapi-user">
+<span id="example-requests-POSTapi-v1-auth-register">
 <blockquote>Example request:</blockquote>
 
 
-<pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/user" \
+<pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/api/v1/auth/register" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
-    --header "Access-Control-Allow-Origin: *"</code></pre>
+    --header "Access-Control-Allow-Origin: *" \
+    --data "{
+    \"name\": \"id\",
+    \"email\": \"eos\",
+    \"password\": \"eos\",
+    \"confirm_password\": \"consequatur\"
+}"
+</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/user"
+    "http://localhost:8000/api/v1/auth/register"
 );
 
 const headers = {
@@ -104,18 +111,32 @@ const headers = {
     "Access-Control-Allow-Origin": "*",
 };
 
+let body = {
+    "name": "id",
+    "email": "eos",
+    "password": "eos",
+    "confirm_password": "consequatur"
+}
+
 fetch(url, {
-    method: "GET",
+    method: "POST",
     headers,
+    body: JSON.stringify(body),
 }).then(response =&gt; response.json());</code></pre>
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
-$response = $client-&gt;get(
-    'http://localhost:8000/api/user',
+$response = $client-&gt;post(
+    'http://localhost:8000/api/v1/auth/register',
     [
         'headers' =&gt; [
             'Accept' =&gt; 'application/json',
             'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+        'json' =&gt; [
+            'name' =&gt; 'id',
+            'email' =&gt; 'eos',
+            'password' =&gt; 'eos',
+            'confirm_password' =&gt; 'consequatur',
         ],
     ]
 );
@@ -123,65 +144,82 @@ $body = $response-&gt;getBody();
 print_r(json_decode((string) $body));</code></pre>
 </span>
 
-<span id="example-responses-GETapi-user">
-            <blockquote>
-            <p>Example response (401):</p>
-        </blockquote>
-                <details class="annotation">
-            <summary>
-                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
-            </summary>
-            <pre><code class="language-http">cache-control: no-cache, private
-content-type: application/json
-access-control-allow-origin: *
- </code></pre>
-        </details>         <pre>
-
-<code class="language-json">{
-    &quot;message&quot;: &quot;Unauthenticated.&quot;
-}</code>
- </pre>
-    </span>
-<span id="execution-results-GETapi-user" hidden>
+<span id="example-responses-POSTapi-v1-auth-register">
+</span>
+<span id="execution-results-POSTapi-v1-auth-register" hidden>
     <blockquote>Received response<span
-                id="execution-response-status-GETapi-user"></span>:
+                id="execution-response-status-POSTapi-v1-auth-register"></span>:
     </blockquote>
-    <pre class="json"><code id="execution-response-content-GETapi-user"></code></pre>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-auth-register"></code></pre>
 </span>
-<span id="execution-error-GETapi-user" hidden>
+<span id="execution-error-POSTapi-v1-auth-register" hidden>
     <blockquote>Request failed with error:</blockquote>
-    <pre><code id="execution-error-message-GETapi-user"></code></pre>
+    <pre><code id="execution-error-message-POSTapi-v1-auth-register"></code></pre>
 </span>
-<form id="form-GETapi-user" data-method="GET"
-      data-path="api/user"
+<form id="form-POSTapi-v1-auth-register" data-method="POST"
+      data-path="api/v1/auth/register"
       data-authed="0"
       data-hasfiles="0"
       data-isarraybody="0"
       data-headers='{"Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
       autocomplete="off"
-      onsubmit="event.preventDefault(); executeTryOut('GETapi-user', this);">
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-auth-register', this);">
     <h3>
         Request&nbsp;&nbsp;&nbsp;
                     <button type="button"
                     style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-tryout-GETapi-user"
-                    onclick="tryItOut('GETapi-user');">Try it out ⚡
+                    id="btn-tryout-POSTapi-v1-auth-register"
+                    onclick="tryItOut('POSTapi-v1-auth-register');">Try it out ⚡
             </button>
             <button type="button"
                     style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-canceltryout-GETapi-user"
-                    onclick="cancelTryOut('GETapi-user');" hidden>Cancel
+                    id="btn-canceltryout-POSTapi-v1-auth-register"
+                    onclick="cancelTryOut('POSTapi-v1-auth-register');" hidden>Cancel
             </button>&nbsp;&nbsp;
             <button type="submit"
                     style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
-                    id="btn-executetryout-GETapi-user" hidden>Send Request 💥
+                    id="btn-executetryout-POSTapi-v1-auth-register" hidden>Send Request 💥
             </button>
             </h3>
             <p>
-            <small class="badge badge-green">GET</small>
-            <b><code>api/user</code></b>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/auth/register</code></b>
         </p>
-                    </form>
+                            <h4 class="fancy-heading-panel"><b>Body Parameters</b></h4>
+        <p>
+            <b><code>name</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="name"
+               data-endpoint="POSTapi-v1-auth-register"
+               data-component="body" required  hidden>
+    <br>
+<p>The name of the user.</p>        </p>
+                <p>
+            <b><code>email</code></b>&nbsp;&nbsp;<small>string</small>  &nbsp;
+                <input type="text"
+               name="email"
+               data-endpoint="POSTapi-v1-auth-register"
+               data-component="body" required  hidden>
+    <br>
+<p>The email address of the user.</p>        </p>
+                <p>
+            <b><code>password</code></b>&nbsp;&nbsp;<small>password</small>  &nbsp;
+                <input type="text"
+               name="password"
+               data-endpoint="POSTapi-v1-auth-register"
+               data-component="body" required  hidden>
+    <br>
+<p>Password.</p>        </p>
+                <p>
+            <b><code>confirm_password</code></b>&nbsp;&nbsp;<small>password</small>  &nbsp;
+                <input type="text"
+               name="confirm_password"
+               data-endpoint="POSTapi-v1-auth-register"
+               data-component="body" required  hidden>
+    <br>
+<p>Password confirmation.</p>        </p>
+    
+    </form>
 
     
 
