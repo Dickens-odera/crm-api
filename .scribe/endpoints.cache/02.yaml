@@ -45,9 +45,9 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the user.'
+        description: 'User ID'
         required: true
-        example: 18
+        example: 6
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -81,25 +81,25 @@ endpoints:
         name: name
         description: 'The User Name'
         required: true
-        example: consequatur
+        example: quis
         type: string
       email:
         name: email
         description: 'User Email'
         required: true
-        example: eum
+        example: maiores
         type: email
       password:
         name: password
         description: 'User Password'
         required: true
-        example: quam
+        example: molestias
         type: password
       password_confirmation:
         name: password_confirmation
         description: 'Password Confirmation'
         required: true
-        example: harum
+        example: hic
         type: password
     responses: []
     responseFields: []
@@ -119,12 +119,24 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the user.'
+        description: 'The User ID.'
         required: true
-        example: 7
+        example: 3
         type: integer
     queryParameters: []
-    bodyParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'The name of the user'
+        required: true
+        example: fugiat
+        type: string
+      email:
+        name: email
+        description: 'The email of the user'
+        required: true
+        example: nihil
+        type: string
     responses: []
     responseFields: []
   -
@@ -143,9 +155,9 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The ID of the user.'
+        description: 'The ID of the User'
         required: true
-        example: 9
+        example: 17
         type: integer
     queryParameters: []
     bodyParameters: []
