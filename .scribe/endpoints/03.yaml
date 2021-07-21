@@ -1,12 +1,12 @@
-name: Users
-description: 'Class UserController'
+name: Profile
+description: 'Class ProfileController'
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/users
+    uri: api/v1/user/profile
     metadata:
-      title: 'List All Users'
+      title: 'Display User Profile'
       description: ''
       authenticated: true
     headers:
@@ -29,42 +29,10 @@ endpoints:
     responseFields: []
   -
     httpMethods:
-      - GET
-    uri: 'api/v1/users/{id}/details'
+      - PATCH
+    uri: api/v1/user/profile/update
     metadata:
-      title: 'Display User Details'
-      description: ''
-      authenticated: true
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Access-Control-Allow-Origin: '*'
-    urlParameters:
-      id:
-        name: id
-        description: 'User ID'
-        required: true
-        example: 13
-        type: integer
-    queryParameters: []
-    bodyParameters: []
-    responses:
-      -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-  -
-    httpMethods:
-      - POST
-    uri: api/v1/users/create
-    metadata:
-      title: 'Create New User'
+      title: 'Update Profile'
       description: ''
       authenticated: true
     headers:
@@ -77,87 +45,15 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: 'The User Name'
+        description: 'User Name'
         required: true
-        example: aut
+        example: voluptas
         type: string
       email:
         name: email
         description: 'User Email'
         required: true
-        example: dolorem
-        type: email
-      password:
-        name: password
-        description: 'User Password'
-        required: true
-        example: ea
-        type: password
-      password_confirmation:
-        name: password_confirmation
-        description: 'Password Confirmation'
-        required: true
-        example: doloribus
-        type: password
-    responses: []
-    responseFields: []
-  -
-    httpMethods:
-      - PATCH
-    uri: 'api/v1/users/{id}/update'
-    metadata:
-      title: 'Update User Details'
-      description: ''
-      authenticated: true
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Access-Control-Allow-Origin: '*'
-    urlParameters:
-      id:
-        name: id
-        description: 'The User ID.'
-        required: true
-        example: 20
-        type: integer
-    queryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'The name of the user'
-        required: true
-        example: tempore
-        type: string
-      email:
-        name: email
-        description: 'The email of the user'
-        required: true
         example: hic
-        type: string
-    responses: []
-    responseFields: []
-  -
-    httpMethods:
-      - DELETE
-    uri: 'api/v1/users/{id}/delete'
-    metadata:
-      title: 'Delete User'
-      description: ''
-      authenticated: true
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: application/json
-      Accept: application/json
-      Access-Control-Allow-Origin: '*'
-    urlParameters:
-      id:
-        name: id
-        description: 'The ID of the User'
-        required: true
-        example: 13
-        type: integer
-    queryParameters: []
-    bodyParameters: []
+        type: email
     responses: []
     responseFields: []

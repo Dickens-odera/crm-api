@@ -6,6 +6,8 @@ use App\Http\Controllers\api\v1\CustomerController;
 use App\Http\Controllers\api\v1\UserController;
 use App\Http\Controllers\api\v1\AuthController;
 use App\Http\Controllers\api\v1\ProfileController;
+use App\Http\Controllers\api\v1\RoleController;
+use App\Http\Controllers\api\v1\PermissionController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -51,6 +53,7 @@ Route::group(['prefix' => 'v1'], function(){
             Route::patch('/update',[ProfileController::class,'update']);
         });
         //Roles and Permissions
-
+        Route::resource('roles',RoleController::class);
+        Route::resource('permissions', PermissionController::class);
     });
 });

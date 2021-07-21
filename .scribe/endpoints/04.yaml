@@ -1,12 +1,12 @@
-name: Permissions
-description: 'Class PermissionController'
+name: Roles
+description: 'Class RoleController'
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/permissions
+    uri: api/v1/roles
     metadata:
-      title: 'List All Permissions'
+      title: 'List All Roles'
       description: ''
       authenticated: true
     headers:
@@ -30,9 +30,9 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/permissions
+    uri: api/v1/roles
     metadata:
-      title: 'Create New Permission'
+      title: 'Create New Role'
       description: ''
       authenticated: true
     headers:
@@ -45,18 +45,18 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: 'Must be at least 4 characters. Must not be greater than 60 characters.'
+        description: 'Role Name.'
         required: true
-        example: qknaozrkhjuacnnrncrhjlsdntowqctw
+        example: est
         type: string
     responses: []
     responseFields: []
   -
     httpMethods:
       - GET
-    uri: 'api/v1/permissions/{id}'
+    uri: 'api/v1/roles/{id}'
     metadata:
-      title: 'Display Permission Details'
+      title: 'Display Role Details'
       description: ''
       authenticated: true
     headers:
@@ -67,9 +67,9 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The Permission ID'
+        description: 'The Role ID'
         required: true
-        example: 12
+        example: 19
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -87,9 +87,9 @@ endpoints:
     httpMethods:
       - PUT
       - PATCH
-    uri: 'api/v1/permissions/{id}'
+    uri: 'api/v1/roles/{id}'
     metadata:
-      title: 'Update Permission'
+      title: 'Update Role'
       description: ''
       authenticated: true
     headers:
@@ -100,26 +100,26 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The Permission ID'
+        description: 'The Role ID'
         required: true
-        example: 17
+        example: 14
         type: integer
     queryParameters: []
     bodyParameters:
       name:
         name: name
-        description: 'The Permission Name'
+        description: 'Role Name'
         required: true
-        example: eaque
+        example: quis
         type: string
     responses: []
     responseFields: []
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/permissions/{id}'
+    uri: 'api/v1/roles/{id}'
     metadata:
-      title: 'Delete Permission'
+      title: 'Delete Role'
       description: ''
       authenticated: true
     headers:
@@ -130,9 +130,9 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The Permission ID.'
+        description: 'Role ID'
         required: true
-        example: 3
+        example: 2
         type: integer
     queryParameters: []
     bodyParameters: []

@@ -3,82 +3,78 @@
 namespace App\Http\Controllers\api\v1;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\PermissionRequest;
+use App\Http\Requests\PermissionUpdateRequest;
+use Illuminate\Http\JsonResponse;
 
+/**
+ * Permission Management
+ * @group Permissions
+ * Class PermissionController
+ * @package App\Http\Controllers\api\v1
+ */
 class PermissionController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * List All Permissions
      *
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
+     * @authenticated
      */
-    public function index()
+    public function index(): JsonResponse
     {
         //
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Create New Permission
      *
-     * @return \Illuminate\Http\Response
+     * @param PermissionRequest $request
+     * @return JsonResponse
+     * @authenticated
      */
-    public function create()
+    public function store(PermissionRequest $request): JsonResponse
     {
         //
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display Permission Details
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @urlParam id integer required The Permission ID
+     * @return JsonResponse
+     * @authenticated
      */
-    public function store(Request $request)
+    public function show(int $id): JsonResponse
     {
         //
     }
 
     /**
-     * Display the specified resource.
+     * Update Permission
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param PermissionUpdateRequest $request
+     * @param int $id
+     * @bodyParam name string required The Permission Name
+     * @urlParam id integer required The Permission ID
+     * @return JsonResponse
+     * @authenticated
      */
-    public function show($id)
+    public function update(PermissionUpdateRequest $request, int $id): JsonResponse
     {
         //
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Delete Permission
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @urlParam id integer required The Permission ID.
+     * @return JsonResponse
+     * @authenticated
      */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         //
     }
