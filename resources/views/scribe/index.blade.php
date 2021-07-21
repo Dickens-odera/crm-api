@@ -69,7 +69,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">http://localhost:8000</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
 
@@ -94,10 +94,10 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"aliquam\",
-    \"email\": \"quibusdam\",
-    \"password\": \"corrupti\",
-    \"confirm_password\": \"magni\"
+    \"name\": \"accusantium\",
+    \"email\": \"dolore\",
+    \"password\": \"ut\",
+    \"confirm_password\": \"quia\"
 }"
 </code></pre>
 
@@ -112,10 +112,10 @@ const headers = {
 };
 
 let body = {
-    "name": "aliquam",
-    "email": "quibusdam",
-    "password": "corrupti",
-    "confirm_password": "magni"
+    "name": "accusantium",
+    "email": "dolore",
+    "password": "ut",
+    "confirm_password": "quia"
 }
 
 fetch(url, {
@@ -133,10 +133,10 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'aliquam',
-            'email' =&gt; 'quibusdam',
-            'password' =&gt; 'corrupti',
-            'confirm_password' =&gt; 'magni',
+            'name' =&gt; 'accusantium',
+            'email' =&gt; 'dolore',
+            'password' =&gt; 'ut',
+            'confirm_password' =&gt; 'quia',
         ],
     ]
 );
@@ -238,8 +238,8 @@ print_r(json_decode((string) $body));</code></pre>
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"email\": \"ullam\",
-    \"password\": \"eligendi\"
+    \"email\": \"voluptatibus\",
+    \"password\": \"dicta\"
 }"
 </code></pre>
 
@@ -254,8 +254,8 @@ const headers = {
 };
 
 let body = {
-    "email": "ullam",
-    "password": "eligendi"
+    "email": "voluptatibus",
+    "password": "dicta"
 }
 
 fetch(url, {
@@ -273,8 +273,8 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'email' =&gt; 'ullam',
-            'password' =&gt; 'eligendi',
+            'email' =&gt; 'voluptatibus',
+            'password' =&gt; 'dicta',
         ],
     ]
 );
@@ -584,9 +584,9 @@ access-control-allow-origin: *
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
-    --form "name=id" \
-    --form "surname=sapiente" \
-    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\phpF210.tmp" </code></pre>
+    --form "name=aut" \
+    --form "surname=est" \
+    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\php9D51.tmp" </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/v1/customers/create"
@@ -600,8 +600,8 @@ const headers = {
 };
 
 const body = new FormData();
-body.append('name', 'id');
-body.append('surname', 'sapiente');
+body.append('name', 'aut');
+body.append('surname', 'est');
 body.append('photo_url', document.querySelector('input[name="photo_url"]').files[0]);
 
 fetch(url, {
@@ -622,15 +622,15 @@ $response = $client-&gt;post(
         'multipart' =&gt; [
             [
                 'name' =&gt; 'name',
-                'contents' =&gt; 'id'
+                'contents' =&gt; 'aut'
             ],
             [
                 'name' =&gt; 'surname',
-                'contents' =&gt; 'sapiente'
+                'contents' =&gt; 'est'
             ],
             [
                 'name' =&gt; 'photo_url',
-                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\phpF210.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\php9D51.tmp', 'r')
             ],
         ],
     ]
@@ -856,17 +856,17 @@ access-control-allow-origin: *
 
 
 <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost:8000/api/v1/customers/13/update" \
+    "http://localhost:8000/api/v1/customers/18/update" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
-    --form "name=corrupti" \
-    --form "surname=sint" \
-    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\phpF220.tmp" </code></pre>
+    --form "name=perspiciatis" \
+    --form "surname=eum" \
+    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\php9D52.tmp" </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/customers/13/update"
+    "http://localhost:8000/api/v1/customers/18/update"
 );
 
 const headers = {
@@ -877,8 +877,8 @@ const headers = {
 };
 
 const body = new FormData();
-body.append('name', 'corrupti');
-body.append('surname', 'sint');
+body.append('name', 'perspiciatis');
+body.append('surname', 'eum');
 body.append('photo_url', document.querySelector('input[name="photo_url"]').files[0]);
 
 fetch(url, {
@@ -889,7 +889,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;patch(
-    'http://localhost:8000/api/v1/customers/13/update',
+    'http://localhost:8000/api/v1/customers/18/update',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -899,15 +899,15 @@ $response = $client-&gt;patch(
         'multipart' =&gt; [
             [
                 'name' =&gt; 'name',
-                'contents' =&gt; 'corrupti'
+                'contents' =&gt; 'perspiciatis'
             ],
             [
                 'name' =&gt; 'surname',
-                'contents' =&gt; 'sint'
+                'contents' =&gt; 'eum'
             ],
             [
                 'name' =&gt; 'photo_url',
-                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\phpF220.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\php9D52.tmp', 'r')
             ],
         ],
     ]
@@ -1110,6 +1110,576 @@ print_r(json_decode((string) $body));</code></pre>
                data-component="url" required  hidden>
     <br>
 <p>The Customer ID</p>            </p>
+                    </form>
+
+        <h1 id="users">Users</h1>
+
+    <p>Class UserController</p>
+
+            <h2 id="users-GETapi-v1-users">List All Users</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-users">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/api/v1/users" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --header "Access-Control-Allow-Origin: *"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/users"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Access-Control-Allow-Origin": "*",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost:8000/api/v1/users',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Accept' =&gt; 'application/json',
+            'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+</span>
+
+<span id="example-responses-GETapi-v1-users">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-users" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-users"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-users"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-users" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-users"></code></pre>
+</span>
+<form id="form-GETapi-v1-users" data-method="GET"
+      data-path="api/v1/users"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-users', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-users"
+                    onclick="tryItOut('GETapi-v1-users');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-users"
+                    onclick="cancelTryOut('GETapi-v1-users');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-users" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/users</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-v1-users" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-v1-users"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+            <h2 id="users-GETapi-v1-users--id--details">Display User Details</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-GETapi-v1-users--id--details">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request GET \
+    --get "http://localhost:8000/api/v1/users/7/details" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --header "Access-Control-Allow-Origin: *"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/users/7/details"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Access-Control-Allow-Origin": "*",
+};
+
+fetch(url, {
+    method: "GET",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;get(
+    'http://localhost:8000/api/v1/users/7/details',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Accept' =&gt; 'application/json',
+            'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+</span>
+
+<span id="example-responses-GETapi-v1-users--id--details">
+            <blockquote>
+            <p>Example response (401):</p>
+        </blockquote>
+                <details class="annotation">
+            <summary>
+                <small onclick="textContent = parentElement.parentElement.open ? 'Show headers' : 'Hide headers'">Show headers</small>
+            </summary>
+            <pre><code class="language-http">cache-control: no-cache, private
+content-type: application/json
+access-control-allow-origin: *
+ </code></pre>
+        </details>         <pre>
+
+<code class="language-json">{
+    &quot;message&quot;: &quot;Unauthenticated.&quot;
+}</code>
+ </pre>
+    </span>
+<span id="execution-results-GETapi-v1-users--id--details" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-GETapi-v1-users--id--details"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-GETapi-v1-users--id--details"></code></pre>
+</span>
+<span id="execution-error-GETapi-v1-users--id--details" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-GETapi-v1-users--id--details"></code></pre>
+</span>
+<form id="form-GETapi-v1-users--id--details" data-method="GET"
+      data-path="api/v1/users/{id}/details"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('GETapi-v1-users--id--details', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-GETapi-v1-users--id--details"
+                    onclick="tryItOut('GETapi-v1-users--id--details');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-GETapi-v1-users--id--details"
+                    onclick="cancelTryOut('GETapi-v1-users--id--details');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-GETapi-v1-users--id--details" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-green">GET</small>
+            <b><code>api/v1/users/{id}/details</code></b>
+        </p>
+                <p>
+            <label id="auth-GETapi-v1-users--id--details" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="GETapi-v1-users--id--details"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="GETapi-v1-users--id--details"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of the user.</p>            </p>
+                    </form>
+
+            <h2 id="users-POSTapi-v1-users-create">Create New User</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-users-create">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/api/v1/users/create" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --header "Access-Control-Allow-Origin: *"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/users/create"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Access-Control-Allow-Origin": "*",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost:8000/api/v1/users/create',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Accept' =&gt; 'application/json',
+            'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-v1-users-create">
+</span>
+<span id="execution-results-POSTapi-v1-users-create" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-users-create"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-users-create"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-users-create" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-users-create"></code></pre>
+</span>
+<form id="form-POSTapi-v1-users-create" data-method="POST"
+      data-path="api/v1/users/create"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-users-create', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-users-create"
+                    onclick="tryItOut('POSTapi-v1-users-create');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-users-create"
+                    onclick="cancelTryOut('POSTapi-v1-users-create');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-users-create" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/users/create</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-v1-users-create" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTapi-v1-users-create"
+                                                                data-component="header"></label>
+        </p>
+                </form>
+
+            <h2 id="users-PATCHapi-v1-users--id--update">Update User Details</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-PATCHapi-v1-users--id--update">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request PATCH \
+    "http://localhost:8000/api/v1/users/15/update" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --header "Access-Control-Allow-Origin: *"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/users/15/update"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Access-Control-Allow-Origin": "*",
+};
+
+fetch(url, {
+    method: "PATCH",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;patch(
+    'http://localhost:8000/api/v1/users/15/update',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Accept' =&gt; 'application/json',
+            'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+</span>
+
+<span id="example-responses-PATCHapi-v1-users--id--update">
+</span>
+<span id="execution-results-PATCHapi-v1-users--id--update" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-PATCHapi-v1-users--id--update"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-PATCHapi-v1-users--id--update"></code></pre>
+</span>
+<span id="execution-error-PATCHapi-v1-users--id--update" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-PATCHapi-v1-users--id--update"></code></pre>
+</span>
+<form id="form-PATCHapi-v1-users--id--update" data-method="PATCH"
+      data-path="api/v1/users/{id}/update"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('PATCHapi-v1-users--id--update', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-PATCHapi-v1-users--id--update"
+                    onclick="tryItOut('PATCHapi-v1-users--id--update');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-PATCHapi-v1-users--id--update"
+                    onclick="cancelTryOut('PATCHapi-v1-users--id--update');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-PATCHapi-v1-users--id--update" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-purple">PATCH</small>
+            <b><code>api/v1/users/{id}/update</code></b>
+        </p>
+                <p>
+            <label id="auth-PATCHapi-v1-users--id--update" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="PATCHapi-v1-users--id--update"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="PATCHapi-v1-users--id--update"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of the user.</p>            </p>
+                    </form>
+
+            <h2 id="users-DELETEapi-v1-users--id--delete">Delete User</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-DELETEapi-v1-users--id--delete">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request DELETE \
+    "http://localhost:8000/api/v1/users/6/delete" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --header "Access-Control-Allow-Origin: *"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/users/6/delete"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Access-Control-Allow-Origin": "*",
+};
+
+fetch(url, {
+    method: "DELETE",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;delete(
+    'http://localhost:8000/api/v1/users/6/delete',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Accept' =&gt; 'application/json',
+            'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+</span>
+
+<span id="example-responses-DELETEapi-v1-users--id--delete">
+</span>
+<span id="execution-results-DELETEapi-v1-users--id--delete" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-DELETEapi-v1-users--id--delete"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-DELETEapi-v1-users--id--delete"></code></pre>
+</span>
+<span id="execution-error-DELETEapi-v1-users--id--delete" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-DELETEapi-v1-users--id--delete"></code></pre>
+</span>
+<form id="form-DELETEapi-v1-users--id--delete" data-method="DELETE"
+      data-path="api/v1/users/{id}/delete"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('DELETEapi-v1-users--id--delete', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-DELETEapi-v1-users--id--delete"
+                    onclick="tryItOut('DELETEapi-v1-users--id--delete');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-DELETEapi-v1-users--id--delete"
+                    onclick="cancelTryOut('DELETEapi-v1-users--id--delete');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-DELETEapi-v1-users--id--delete" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-red">DELETE</small>
+            <b><code>api/v1/users/{id}/delete</code></b>
+        </p>
+                <p>
+            <label id="auth-DELETEapi-v1-users--id--delete" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="DELETEapi-v1-users--id--delete"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="DELETEapi-v1-users--id--delete"
+               data-component="url" required  hidden>
+    <br>
+<p>The ID of the user.</p>            </p>
                     </form>
 
     

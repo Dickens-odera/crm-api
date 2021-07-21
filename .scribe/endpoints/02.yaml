@@ -1,12 +1,12 @@
-name: Customers
-description: 'Class CustomerController'
+name: Users
+description: 'Class UserController'
 endpoints:
   -
     httpMethods:
       - GET
-    uri: api/v1/customers
+    uri: api/v1/users
     metadata:
-      title: 'List All Customers'
+      title: 'List All Users'
       description: ''
       authenticated: true
     headers:
@@ -15,6 +15,38 @@ endpoints:
       Accept: application/json
       Access-Control-Allow-Origin: '*'
     urlParameters: []
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/users/{id}/details'
+    metadata:
+      title: 'Display User Details'
+      description: ''
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Access-Control-Allow-Origin: '*'
+    urlParameters:
+      id:
+        name: id
+        description: 'The ID of the user.'
+        required: true
+        example: 7
+        type: integer
     queryParameters: []
     bodyParameters: []
     responses:
@@ -30,45 +62,27 @@ endpoints:
   -
     httpMethods:
       - POST
-    uri: api/v1/customers/create
+    uri: api/v1/users/create
     metadata:
-      title: 'Create New Customer'
+      title: 'Create New User'
       description: ''
       authenticated: true
     headers:
       Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: multipart/form-data
+      Content-Type: application/json
       Accept: application/json
       Access-Control-Allow-Origin: '*'
     urlParameters: []
     queryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: 'Customer''s Name.'
-        required: true
-        example: aut
-        type: string
-      surname:
-        name: surname
-        description: 'Customer''s Surname.'
-        required: true
-        example: est
-        type: string
-      photo_url:
-        name: photo_url
-        description: 'Customer''s Photo'
-        required: false
-        example: null
-        type: file
+    bodyParameters: []
     responses: []
     responseFields: []
   -
     httpMethods:
-      - GET
-    uri: 'api/v1/customers/{id}/details'
+      - PATCH
+    uri: 'api/v1/users/{id}/update'
     metadata:
-      title: 'Display Customer Details'
+      title: 'Update User Details'
       description: ''
       authenticated: true
     headers:
@@ -79,70 +93,20 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The Customer ID.'
+        description: 'The ID of the user.'
         required: true
-        example: 11
+        example: 15
         type: integer
     queryParameters: []
     bodyParameters: []
-    responses:
-      -
-        status: 401
-        content: '{"message":"Unauthenticated."}'
-        headers:
-          cache-control: 'no-cache, private'
-          content-type: application/json
-          access-control-allow-origin: '*'
-        description: null
-    responseFields: []
-  -
-    httpMethods:
-      - PATCH
-    uri: 'api/v1/customers/{id}/update'
-    metadata:
-      title: 'Update Customer'
-      description: ''
-      authenticated: true
-    headers:
-      Authorization: 'Bearer {YOUR_AUTH_KEY}'
-      Content-Type: multipart/form-data
-      Accept: application/json
-      Access-Control-Allow-Origin: '*'
-    urlParameters:
-      id:
-        name: id
-        description: 'Customer ID. Example 1'
-        required: true
-        example: 18
-        type: integer
-    queryParameters: []
-    bodyParameters:
-      name:
-        name: name
-        description: '.The Customer''s name'
-        required: true
-        example: perspiciatis
-        type: string
-      surname:
-        name: surname
-        description: '. The Customer''s surname'
-        required: true
-        example: eum
-        type: string
-      photo_url:
-        name: photo_url
-        description: 'The new customer''s photo'
-        required: false
-        example: null
-        type: file
     responses: []
     responseFields: []
   -
     httpMethods:
       - DELETE
-    uri: 'api/v1/customers/{id}/delete'
+    uri: 'api/v1/users/{id}/delete'
     metadata:
-      title: 'Delete Customer'
+      title: 'Delete User'
       description: ''
       authenticated: true
     headers:
@@ -153,9 +117,9 @@ endpoints:
     urlParameters:
       id:
         name: id
-        description: 'The Customer ID'
+        description: 'The ID of the user.'
         required: true
-        example: 1
+        example: 6
         type: integer
     queryParameters: []
     bodyParameters: []
