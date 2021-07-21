@@ -26,7 +26,7 @@ use Illuminate\Support\Arr;
 class AuthController extends Controller
 {
     /**
-     * Register a new user
+     * User Registration
      * @param UserRequest $request
      * @bodyParam  name string required The name of the user.
      * @bodyParam  email string required The email address of the user.
@@ -54,5 +54,47 @@ class AuthController extends Controller
             return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
         }
         return $this->commonResponse(true,'Registration successful', new UserResource($user), Response::HTTP_CREATED);
+    }
+
+    /**
+     * User Login
+     * @param Request $request
+     * @bodyParam email string required Email Address
+     * @bodyParam password password required Password
+     * @return JsonResponse
+     */
+    public function login(Request $request): JsonResponse
+    {
+        $rules = [
+            'email' => 'required',
+            'password' => 'required'
+        ];
+        $messages = [
+            'email.required' => 'Please enter your email address',
+            'password.required' => 'Please enter your password'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if($validator->fails()){
+            return $this->commonResponse(false,Arr::flatten($validator->messages()->get('*')),'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        try{
+            $user = User::firstWhere('email', $request->email);
+            if (!$user) {
+                return $this->commonResponse(false, 'A user with the provided credentials could not be found', '', Response::HTTP_EXPECTATION_FAILED);
+            }
+            if(!Hash::check($request->password, $user->password)) {
+                return $this->commonResponse(false,'Invalid password','',Response::HTTP_EXPECTATION_FAILED);
+            }
+            $data = [
+                'user' => new UserResource($user),
+                'accessToken' => $user->createToken('crm-user')->plainTextToken //generate access token for the user
+            ];
+        }catch (QueryException $exception){
+            return $this->commonResponse(false, $exception->errorInfo[2], '', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Something went wrong logging in the user. ERROR:'. $exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        return $this->commonResponse(true,'Login Success', $data,Response::HTTP_OK);
     }
 }

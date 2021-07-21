@@ -10,16 +10,16 @@ trait CommonApiResponse
      * Common API response for controllers
      * @param bool $status
      * @param $message
-     * @param $result
-     * @param $code
+     * @param $data
+     * @param int $code
      * @return JsonResponse
      */
-    public function commonResponse(bool $status, $message, $result, $code): JsonResponse
+    public function commonResponse(bool $status, $message, $data, int $code): JsonResponse
     {
         return response()->json([
             'success' => $status,
             'message' => $message,
-            'result'  => $result
+            'data'    => $data
         ], $code);
     }
 }

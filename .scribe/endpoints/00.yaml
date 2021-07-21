@@ -20,25 +20,54 @@ endpoints:
         name: name
         description: 'The name of the user.'
         required: true
-        example: id
+        example: qui
         type: string
       email:
         name: email
         description: 'The email address of the user.'
         required: true
-        example: eos
+        example: sed
         type: string
       password:
         name: password
         description: Password.
         required: true
-        example: eos
+        example: laboriosam
         type: password
       confirm_password:
         name: confirm_password
         description: 'Password confirmation.'
         required: true
-        example: consequatur
+        example: dolorem
+        type: password
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/auth/login
+    metadata:
+      title: 'User Login'
+      description: ''
+      authenticated: false
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      Access-Control-Allow-Origin: '*'
+    urlParameters: []
+    queryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'Email Address'
+        required: true
+        example: occaecati
+        type: string
+      password:
+        name: password
+        description: Password
+        required: true
+        example: consectetur
         type: password
     responses: []
     responseFields: []

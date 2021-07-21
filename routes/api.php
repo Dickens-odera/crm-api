@@ -20,5 +20,6 @@ Route::group(['prefix' => 'v1'], function(){
     //user authentication
     Route::group(['prefix' => 'auth'], function(){
        Route::post('/register',[AuthController::class,'register']);
+       Route::post('/login',[AuthController::class,'login']);
     });
 });
