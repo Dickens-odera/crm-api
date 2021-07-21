@@ -9,7 +9,6 @@ use App\Http\Resources\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
