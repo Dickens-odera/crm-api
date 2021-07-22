@@ -24,7 +24,7 @@ class CustomerRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:customers|string|min:3|max:10',
+            'name' => 'required|unique:customers|string|min:3|max:30',
             'surname' => 'required|unique:customers|string|min:3|max:10',
             'photo_url' => 'nullable|image|mimes:jpeg,svg,png,jpg|max:2048'
         ];
@@ -41,7 +41,7 @@ class CustomerRequest extends FormRequest
             'name.unique'   => 'The name has already been taken',
             'name.string'   => 'Only valid string characters are allowed for the name',
             'name.min'      => 'The name cannot be less than 3 characters long',
-            'name.max'      => 'The name cannot be more than 10 characters long',
+            'name.max'      => 'The name cannot be more than 30 characters long',
             'surname.string'   => 'Only valid string characters are allowed for the surname',
             'surname.min'      => 'The surname cannot be less than 3 characters long',
             'surname.max'      => 'The surname cannot be more than 10 characters long',

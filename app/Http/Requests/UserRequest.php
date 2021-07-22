@@ -24,7 +24,7 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:users|min:3|max:20',
+            'name' => 'required|string|unique:users|min:3|max:60',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:4|max:60|confirmed',
             'password_confirmation' => 'required'
@@ -37,7 +37,7 @@ class UserRequest extends FormRequest
             'name.unique'   => 'The name has already been taken',
             'name.string'   => 'Please use valid string name format',
             'name.min'      => 'Name cannot be less than 3 characters long',
-            'name.max'      => 'Name cannot be more than 20 characters long',
+            'name.max'      => 'Name cannot be more than 60 characters long',
             'email.required' => 'Please provide your email address',
             'email.email'    => 'Please provide a valid email address',
             'email.unique'   => 'The email address has already been taken',

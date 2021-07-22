@@ -47,7 +47,7 @@ endpoints:
         name: id
         description: 'User ID'
         required: true
-        example: 18
+        example: 11
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -81,25 +81,25 @@ endpoints:
         name: name
         description: 'The User Name'
         required: true
-        example: laboriosam
+        example: delectus
         type: string
       email:
         name: email
         description: 'User Email'
         required: true
-        example: voluptatem
+        example: neque
         type: email
       password:
         name: password
         description: 'User Password'
         required: true
-        example: occaecati
+        example: quo
         type: password
       password_confirmation:
         name: password_confirmation
         description: 'Password Confirmation'
         required: true
-        example: alias
+        example: voluptas
         type: password
     responses: []
     responseFields: []
@@ -121,7 +121,7 @@ endpoints:
         name: id
         description: 'The User ID.'
         required: true
-        example: 6
+        example: 5
         type: integer
     queryParameters: []
     bodyParameters:
@@ -129,13 +129,13 @@ endpoints:
         name: name
         description: 'The name of the user'
         required: true
-        example: voluptas
+        example: sit
         type: string
       email:
         name: email
         description: 'The email of the user'
         required: true
-        example: et
+        example: quisquam
         type: string
     responses: []
     responseFields: []
@@ -157,7 +157,7 @@ endpoints:
         name: id
         description: 'The ID of the User'
         required: true
-        example: 2
+        example: 3
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -181,7 +181,7 @@ endpoints:
         name: id
         description: 'The User ID'
         required: true
-        example: 12
+        example: 11
         type: integer
     queryParameters: []
     bodyParameters: []
