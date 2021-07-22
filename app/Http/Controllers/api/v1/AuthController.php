@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Events\UserCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserResource;
@@ -45,6 +46,7 @@ class AuthController extends Controller
             if(!$newUser){
                 return $this->commonResponse(false,'Registration Unsuccessful, please try again', '', Response::HTTP_UNPROCESSABLE_ENTITY);
             }
+            UserCreated::dispatch($newUser); //assign the user a user role
             return $this->commonResponse(true,'Registration successful', new UserResource($newUser), Response::HTTP_CREATED);
         }catch(QueryException $exception){
             return $this->commonResponse(false, $exception->errorInfo[2], '', Response::HTTP_UNPROCESSABLE_ENTITY);

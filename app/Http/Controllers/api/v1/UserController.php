@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Events\UserCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
@@ -72,6 +73,7 @@ class UserController extends Controller
             ));
             if($newUser){
                 //TODO send the new user an invitation to set their reset their password
+                UserCreated::dispatch($newUser); //assign the user a user role
                 return $this->commonResponse(true,'User Created successfully',new UserResource($newUser), Response::HTTP_CREATED);
             }
             return $this->commonResponse(false,'Failed to create user','',Response::HTTP_EXPECTATION_FAILED);
