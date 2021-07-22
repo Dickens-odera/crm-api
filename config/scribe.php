@@ -244,7 +244,7 @@ INTRO
     /*
      * The base URL to be used in examples. If this is empty, Scribe will use the value of config('app.url').
      */
-    'base_url' => null,
+    'base_url' => 'https://agile-monkeys-api-backend.herokuapp.com/',
     /*
      * Generate a Postman collection (v2.1.0) in addition to HTML docs.
      * For 'static' docs, the collection will be generated to public/docs/collection.json.
