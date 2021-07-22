@@ -47,9 +47,9 @@ endpoints:
     bodyParameters:
       name:
         name: name
-        description: 'Must be at least 4 characters. Must not be greater than 60 characters.'
+        description: 'The Permission Name'
         required: true
-        example: qknaozrkhjuacnnrncrhjlsdntowqctw
+        example: laudantium
         type: string
     responses: []
     responseFields: []
@@ -71,7 +71,7 @@ endpoints:
         name: id
         description: 'The Permission ID'
         required: true
-        example: 12
+        example: 16
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -104,7 +104,7 @@ endpoints:
         name: id
         description: 'The Permission ID'
         required: true
-        example: 17
+        example: 16
         type: integer
     queryParameters: []
     bodyParameters:
@@ -112,7 +112,7 @@ endpoints:
         name: name
         description: 'The Permission Name'
         required: true
-        example: eaque
+        example: sed
         type: string
     responses: []
     responseFields: []
@@ -134,7 +134,7 @@ endpoints:
         name: id
         description: 'The Permission ID.'
         required: true
-        example: 3
+        example: 19
         type: integer
     queryParameters: []
     bodyParameters: []

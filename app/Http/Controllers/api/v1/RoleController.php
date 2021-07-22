@@ -11,13 +11,10 @@ use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Log;
 use Spatie\Permission\Models\Role;
-use Spatie\Permission\Models\Permission;
 use App\Http\Requests\RoleRequest;
 use App\Http\Requests\RoleUpdateRequest;
-use App\Http\Requests\PermissionRequest;
 use App\Http\Resources\RoleResource;
-use App\Http\Resources\PermissionResource;
-use Symfony\Component\HttpKernel\Event\ResponseEvent;
+
 
 /** Role Management
  * @group Roles
