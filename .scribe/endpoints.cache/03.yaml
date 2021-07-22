@@ -49,13 +49,13 @@ endpoints:
         name: name
         description: 'User Name'
         required: true
-        example: natus
+        example: neque
         type: string
       email:
         name: email
         description: 'User Email'
         required: true
-        example: ipsam
+        example: modi
         type: email
     responses: []
     responseFields: []

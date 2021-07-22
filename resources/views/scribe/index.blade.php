@@ -69,7 +69,7 @@ You can switch the language used with the tabs at the top right (or from the nav
 <pre><code class="language-yaml">http://localhost:8000</code></pre>
 
         <h1>Authenticating requests</h1>
-<p>To authenticate requests, include an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
+<p>Authenticate requests to this API's endpoints by sending an <strong><code>Authorization</code></strong> header with the value <strong><code>"Bearer {YOUR_AUTH_KEY}"</code></strong>.</p>
 <p>All authenticated endpoints are marked with a <code>requires authentication</code> badge in the documentation below.</p>
 <p>You can retrieve your token by visiting your dashboard and clicking <b>Generate API token</b>.</p>
 
@@ -94,10 +94,10 @@ You can switch the language used with the tabs at the top right (or from the nav
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"est\",
-    \"email\": \"consequatur\",
-    \"password\": \"est\",
-    \"password_confirmation\": \"aspernatur\"
+    \"name\": \"sint\",
+    \"email\": \"tempore\",
+    \"password\": \"rem\",
+    \"password_confirmation\": \"alias\"
 }"
 </code></pre>
 
@@ -112,10 +112,10 @@ const headers = {
 };
 
 let body = {
-    "name": "est",
-    "email": "consequatur",
-    "password": "est",
-    "password_confirmation": "aspernatur"
+    "name": "sint",
+    "email": "tempore",
+    "password": "rem",
+    "password_confirmation": "alias"
 }
 
 fetch(url, {
@@ -133,10 +133,10 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'est',
-            'email' =&gt; 'consequatur',
-            'password' =&gt; 'est',
-            'password_confirmation' =&gt; 'aspernatur',
+            'name' =&gt; 'sint',
+            'email' =&gt; 'tempore',
+            'password' =&gt; 'rem',
+            'password_confirmation' =&gt; 'alias',
         ],
     ]
 );
@@ -238,8 +238,8 @@ print_r(json_decode((string) $body));</code></pre>
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"email\": \"a\",
-    \"password\": \"omnis\"
+    \"email\": \"voluptatum\",
+    \"password\": \"tempore\"
 }"
 </code></pre>
 
@@ -254,8 +254,8 @@ const headers = {
 };
 
 let body = {
-    "email": "a",
-    "password": "omnis"
+    "email": "voluptatum",
+    "password": "tempore"
 }
 
 fetch(url, {
@@ -273,8 +273,8 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'email' =&gt; 'a',
-            'password' =&gt; 'omnis',
+            'email' =&gt; 'voluptatum',
+            'password' =&gt; 'tempore',
         ],
     ]
 );
@@ -584,9 +584,9 @@ access-control-allow-origin: *
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
-    --form "name=ut" \
-    --form "surname=nihil" \
-    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\php6220.tmp" </code></pre>
+    --form "name=sit" \
+    --form "surname=reiciendis" \
+    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\php3877.tmp" </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
     "http://localhost:8000/api/v1/customers/create"
@@ -600,8 +600,8 @@ const headers = {
 };
 
 const body = new FormData();
-body.append('name', 'ut');
-body.append('surname', 'nihil');
+body.append('name', 'sit');
+body.append('surname', 'reiciendis');
 body.append('photo_url', document.querySelector('input[name="photo_url"]').files[0]);
 
 fetch(url, {
@@ -622,15 +622,15 @@ $response = $client-&gt;post(
         'multipart' =&gt; [
             [
                 'name' =&gt; 'name',
-                'contents' =&gt; 'ut'
+                'contents' =&gt; 'sit'
             ],
             [
                 'name' =&gt; 'surname',
-                'contents' =&gt; 'nihil'
+                'contents' =&gt; 'reiciendis'
             ],
             [
                 'name' =&gt; 'photo_url',
-                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\php6220.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\php3877.tmp', 'r')
             ],
         ],
     ]
@@ -729,14 +729,14 @@ print_r(json_decode((string) $body));</code></pre>
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/customers/4/details" \
+    --get "http://localhost:8000/api/v1/customers/10/details" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/customers/4/details"
+    "http://localhost:8000/api/v1/customers/10/details"
 );
 
 const headers = {
@@ -753,7 +753,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/api/v1/customers/4/details',
+    'http://localhost:8000/api/v1/customers/10/details',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -856,17 +856,17 @@ access-control-allow-origin: *
 
 
 <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost:8000/api/v1/customers/10/update" \
+    "http://localhost:8000/api/v1/customers/20/update" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: multipart/form-data" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
-    --form "name=est" \
-    --form "surname=aut" \
-    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\php6241.tmp" </code></pre>
+    --form "name=harum" \
+    --form "surname=soluta" \
+    --form "photo_url=@C:\Users\John Onyango\AppData\Local\Temp\php3879.tmp" </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/customers/10/update"
+    "http://localhost:8000/api/v1/customers/20/update"
 );
 
 const headers = {
@@ -877,8 +877,8 @@ const headers = {
 };
 
 const body = new FormData();
-body.append('name', 'est');
-body.append('surname', 'aut');
+body.append('name', 'harum');
+body.append('surname', 'soluta');
 body.append('photo_url', document.querySelector('input[name="photo_url"]').files[0]);
 
 fetch(url, {
@@ -889,7 +889,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;patch(
-    'http://localhost:8000/api/v1/customers/10/update',
+    'http://localhost:8000/api/v1/customers/20/update',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -899,15 +899,15 @@ $response = $client-&gt;patch(
         'multipart' =&gt; [
             [
                 'name' =&gt; 'name',
-                'contents' =&gt; 'est'
+                'contents' =&gt; 'harum'
             ],
             [
                 'name' =&gt; 'surname',
-                'contents' =&gt; 'aut'
+                'contents' =&gt; 'soluta'
             ],
             [
                 'name' =&gt; 'photo_url',
-                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\php6241.tmp', 'r')
+                'contents' =&gt; fopen('C:\Users\John Onyango\AppData\Local\Temp\php3879.tmp', 'r')
             ],
         ],
     ]
@@ -1253,7 +1253,7 @@ access-control-allow-origin: *
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"laudantium\"
+    \"name\": \"quia\"
 }"
 </code></pre>
 
@@ -1269,7 +1269,7 @@ const headers = {
 };
 
 let body = {
-    "name": "laudantium"
+    "name": "quia"
 }
 
 fetch(url, {
@@ -1288,7 +1288,7 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'laudantium',
+            'name' =&gt; 'quia',
         ],
     ]
 );
@@ -1370,14 +1370,14 @@ print_r(json_decode((string) $body));</code></pre>
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/permissions/16" \
+    --get "http://localhost:8000/api/v1/permissions/8" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/permissions/16"
+    "http://localhost:8000/api/v1/permissions/8"
 );
 
 const headers = {
@@ -1394,7 +1394,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/api/v1/permissions/16',
+    'http://localhost:8000/api/v1/permissions/8',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1497,18 +1497,18 @@ access-control-allow-origin: *
 
 
 <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/v1/permissions/16" \
+    "http://localhost:8000/api/v1/permissions/5" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"sed\"
+    \"name\": \"voluptatem\"
 }"
 </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/permissions/16"
+    "http://localhost:8000/api/v1/permissions/5"
 );
 
 const headers = {
@@ -1519,7 +1519,7 @@ const headers = {
 };
 
 let body = {
-    "name": "sed"
+    "name": "voluptatem"
 }
 
 fetch(url, {
@@ -1530,7 +1530,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;put(
-    'http://localhost:8000/api/v1/permissions/16',
+    'http://localhost:8000/api/v1/permissions/5',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1538,7 +1538,7 @@ $response = $client-&gt;put(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'sed',
+            'name' =&gt; 'voluptatem',
         ],
     ]
 );
@@ -1633,14 +1633,14 @@ print_r(json_decode((string) $body));</code></pre>
 
 
 <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/permissions/19" \
+    "http://localhost:8000/api/v1/permissions/14" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/permissions/19"
+    "http://localhost:8000/api/v1/permissions/14"
 );
 
 const headers = {
@@ -1657,7 +1657,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost:8000/api/v1/permissions/19',
+    'http://localhost:8000/api/v1/permissions/14',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -1871,8 +1871,8 @@ access-control-allow-origin: *
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"natus\",
-    \"email\": \"ipsam\"
+    \"name\": \"neque\",
+    \"email\": \"modi\"
 }"
 </code></pre>
 
@@ -1888,8 +1888,8 @@ const headers = {
 };
 
 let body = {
-    "name": "natus",
-    "email": "ipsam"
+    "name": "neque",
+    "email": "modi"
 }
 
 fetch(url, {
@@ -1908,8 +1908,8 @@ $response = $client-&gt;patch(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'natus',
-            'email' =&gt; 'ipsam',
+            'name' =&gt; 'neque',
+            'email' =&gt; 'modi',
         ],
     ]
 );
@@ -2127,7 +2127,7 @@ access-control-allow-origin: *
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"iure\"
+    \"name\": \"voluptas\"
 }"
 </code></pre>
 
@@ -2143,7 +2143,7 @@ const headers = {
 };
 
 let body = {
-    "name": "iure"
+    "name": "voluptas"
 }
 
 fetch(url, {
@@ -2162,7 +2162,7 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'iure',
+            'name' =&gt; 'voluptas',
         ],
     ]
 );
@@ -2244,14 +2244,14 @@ print_r(json_decode((string) $body));</code></pre>
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/roles/15" \
+    --get "http://localhost:8000/api/v1/roles/20" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/roles/15"
+    "http://localhost:8000/api/v1/roles/20"
 );
 
 const headers = {
@@ -2268,7 +2268,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/api/v1/roles/15',
+    'http://localhost:8000/api/v1/roles/20',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -2371,18 +2371,18 @@ access-control-allow-origin: *
 
 
 <pre><code class="language-bash">curl --request PUT \
-    "http://localhost:8000/api/v1/roles/1" \
+    "http://localhost:8000/api/v1/roles/9" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"sed\"
+    \"name\": \"ex\"
 }"
 </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/roles/1"
+    "http://localhost:8000/api/v1/roles/9"
 );
 
 const headers = {
@@ -2393,7 +2393,7 @@ const headers = {
 };
 
 let body = {
-    "name": "sed"
+    "name": "ex"
 }
 
 fetch(url, {
@@ -2404,7 +2404,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;put(
-    'http://localhost:8000/api/v1/roles/1',
+    'http://localhost:8000/api/v1/roles/9',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -2412,7 +2412,7 @@ $response = $client-&gt;put(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'sed',
+            'name' =&gt; 'ex',
         ],
     ]
 );
@@ -2507,14 +2507,14 @@ print_r(json_decode((string) $body));</code></pre>
 
 
 <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/roles/20" \
+    "http://localhost:8000/api/v1/roles/19" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/roles/20"
+    "http://localhost:8000/api/v1/roles/19"
 );
 
 const headers = {
@@ -2531,7 +2531,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost:8000/api/v1/roles/20',
+    'http://localhost:8000/api/v1/roles/19',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -2739,14 +2739,14 @@ access-control-allow-origin: *
 
 
 <pre><code class="language-bash">curl --request GET \
-    --get "http://localhost:8000/api/v1/users/19/details" \
+    --get "http://localhost:8000/api/v1/users/18/details" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/users/19/details"
+    "http://localhost:8000/api/v1/users/18/details"
 );
 
 const headers = {
@@ -2763,7 +2763,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;get(
-    'http://localhost:8000/api/v1/users/19/details',
+    'http://localhost:8000/api/v1/users/18/details',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -2872,10 +2872,10 @@ access-control-allow-origin: *
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"tempora\",
-    \"email\": \"id\",
-    \"password\": \"eos\",
-    \"password_confirmation\": \"quia\"
+    \"name\": \"laboriosam\",
+    \"email\": \"voluptatem\",
+    \"password\": \"occaecati\",
+    \"password_confirmation\": \"alias\"
 }"
 </code></pre>
 
@@ -2891,10 +2891,10 @@ const headers = {
 };
 
 let body = {
-    "name": "tempora",
-    "email": "id",
-    "password": "eos",
-    "password_confirmation": "quia"
+    "name": "laboriosam",
+    "email": "voluptatem",
+    "password": "occaecati",
+    "password_confirmation": "alias"
 }
 
 fetch(url, {
@@ -2913,10 +2913,10 @@ $response = $client-&gt;post(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'tempora',
-            'email' =&gt; 'id',
-            'password' =&gt; 'eos',
-            'password_confirmation' =&gt; 'quia',
+            'name' =&gt; 'laboriosam',
+            'email' =&gt; 'voluptatem',
+            'password' =&gt; 'occaecati',
+            'password_confirmation' =&gt; 'alias',
         ],
     ]
 );
@@ -3022,19 +3022,19 @@ print_r(json_decode((string) $body));</code></pre>
 
 
 <pre><code class="language-bash">curl --request PATCH \
-    "http://localhost:8000/api/v1/users/5/update" \
+    "http://localhost:8000/api/v1/users/6/update" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *" \
     --data "{
-    \"name\": \"cum\",
-    \"email\": \"nulla\"
+    \"name\": \"voluptas\",
+    \"email\": \"et\"
 }"
 </code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/users/5/update"
+    "http://localhost:8000/api/v1/users/6/update"
 );
 
 const headers = {
@@ -3045,8 +3045,8 @@ const headers = {
 };
 
 let body = {
-    "name": "cum",
-    "email": "nulla"
+    "name": "voluptas",
+    "email": "et"
 }
 
 fetch(url, {
@@ -3057,7 +3057,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;patch(
-    'http://localhost:8000/api/v1/users/5/update',
+    'http://localhost:8000/api/v1/users/6/update',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -3065,8 +3065,8 @@ $response = $client-&gt;patch(
             'Access-Control-Allow-Origin' =&gt; '*',
         ],
         'json' =&gt; [
-            'name' =&gt; 'cum',
-            'email' =&gt; 'nulla',
+            'name' =&gt; 'voluptas',
+            'email' =&gt; 'et',
         ],
     ]
 );
@@ -3165,14 +3165,14 @@ print_r(json_decode((string) $body));</code></pre>
 
 
 <pre><code class="language-bash">curl --request DELETE \
-    "http://localhost:8000/api/v1/users/18/delete" \
+    "http://localhost:8000/api/v1/users/2/delete" \
     --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
     --header "Content-Type: application/json" \
     --header "Accept: application/json" \
     --header "Access-Control-Allow-Origin: *"</code></pre>
 
 <pre><code class="language-javascript">const url = new URL(
-    "http://localhost:8000/api/v1/users/18/delete"
+    "http://localhost:8000/api/v1/users/2/delete"
 );
 
 const headers = {
@@ -3189,7 +3189,7 @@ fetch(url, {
 
 <pre><code class="language-php">$client = new \GuzzleHttp\Client();
 $response = $client-&gt;delete(
-    'http://localhost:8000/api/v1/users/18/delete',
+    'http://localhost:8000/api/v1/users/2/delete',
     [
         'headers' =&gt; [
             'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
@@ -3260,6 +3260,116 @@ print_r(json_decode((string) $body));</code></pre>
                data-component="url" required  hidden>
     <br>
 <p>The ID of the User</p>            </p>
+                    </form>
+
+            <h2 id="users-POSTapi-v1-users-status--id--admin">Change Admin Status</h2>
+
+<p>
+<small class="badge badge-darkred">requires authentication</small>
+</p>
+
+
+
+<span id="example-requests-POSTapi-v1-users-status--id--admin">
+<blockquote>Example request:</blockquote>
+
+
+<pre><code class="language-bash">curl --request POST \
+    "http://localhost:8000/api/v1/users/status/12/admin" \
+    --header "Authorization: Bearer {YOUR_AUTH_KEY}" \
+    --header "Content-Type: application/json" \
+    --header "Accept: application/json" \
+    --header "Access-Control-Allow-Origin: *"</code></pre>
+
+<pre><code class="language-javascript">const url = new URL(
+    "http://localhost:8000/api/v1/users/status/12/admin"
+);
+
+const headers = {
+    "Authorization": "Bearer {YOUR_AUTH_KEY}",
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+    "Access-Control-Allow-Origin": "*",
+};
+
+fetch(url, {
+    method: "POST",
+    headers,
+}).then(response =&gt; response.json());</code></pre>
+
+<pre><code class="language-php">$client = new \GuzzleHttp\Client();
+$response = $client-&gt;post(
+    'http://localhost:8000/api/v1/users/status/12/admin',
+    [
+        'headers' =&gt; [
+            'Authorization' =&gt; 'Bearer {YOUR_AUTH_KEY}',
+            'Accept' =&gt; 'application/json',
+            'Access-Control-Allow-Origin' =&gt; '*',
+        ],
+    ]
+);
+$body = $response-&gt;getBody();
+print_r(json_decode((string) $body));</code></pre>
+</span>
+
+<span id="example-responses-POSTapi-v1-users-status--id--admin">
+</span>
+<span id="execution-results-POSTapi-v1-users-status--id--admin" hidden>
+    <blockquote>Received response<span
+                id="execution-response-status-POSTapi-v1-users-status--id--admin"></span>:
+    </blockquote>
+    <pre class="json"><code id="execution-response-content-POSTapi-v1-users-status--id--admin"></code></pre>
+</span>
+<span id="execution-error-POSTapi-v1-users-status--id--admin" hidden>
+    <blockquote>Request failed with error:</blockquote>
+    <pre><code id="execution-error-message-POSTapi-v1-users-status--id--admin"></code></pre>
+</span>
+<form id="form-POSTapi-v1-users-status--id--admin" data-method="POST"
+      data-path="api/v1/users/status/{id}/admin"
+      data-authed="1"
+      data-hasfiles="0"
+      data-isarraybody="0"
+      data-headers='{"Authorization":"Bearer {YOUR_AUTH_KEY}","Content-Type":"application\/json","Accept":"application\/json","Access-Control-Allow-Origin":"*"}'
+      autocomplete="off"
+      onsubmit="event.preventDefault(); executeTryOut('POSTapi-v1-users-status--id--admin', this);">
+    <h3>
+        Request&nbsp;&nbsp;&nbsp;
+                    <button type="button"
+                    style="background-color: #8fbcd4; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-tryout-POSTapi-v1-users-status--id--admin"
+                    onclick="tryItOut('POSTapi-v1-users-status--id--admin');">Try it out ⚡
+            </button>
+            <button type="button"
+                    style="background-color: #c97a7e; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-canceltryout-POSTapi-v1-users-status--id--admin"
+                    onclick="cancelTryOut('POSTapi-v1-users-status--id--admin');" hidden>Cancel
+            </button>&nbsp;&nbsp;
+            <button type="submit"
+                    style="background-color: #6ac174; padding: 5px 10px; border-radius: 5px; border-width: thin;"
+                    id="btn-executetryout-POSTapi-v1-users-status--id--admin" hidden>Send Request 💥
+            </button>
+            </h3>
+            <p>
+            <small class="badge badge-black">POST</small>
+            <b><code>api/v1/users/status/{id}/admin</code></b>
+        </p>
+                <p>
+            <label id="auth-POSTapi-v1-users-status--id--admin" hidden>Authorization header:
+                <b><code>Bearer </code></b><input type="text"
+                                                                name="Authorization"
+                                                                data-prefix="Bearer "
+                                                                data-endpoint="POSTapi-v1-users-status--id--admin"
+                                                                data-component="header"></label>
+        </p>
+                <h4 class="fancy-heading-panel"><b>URL Parameters</b></h4>
+                    <p>
+                <b><code>id</code></b>&nbsp;&nbsp;<small>integer</small>  &nbsp;
+                <input type="number"
+               name="id"
+               data-endpoint="POSTapi-v1-users-status--id--admin"
+               data-component="url" required  hidden>
+    <br>
+<p>The User ID</p>            </p>
                     </form>
 
     

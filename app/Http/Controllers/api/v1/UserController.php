@@ -14,6 +14,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -163,6 +164,37 @@ class UserController extends Controller
             return $this->commonResponse(false,$queryException->errorInfo[2],'',Response::HTTP_UNPROCESSABLE_ENTITY);
         }catch (Exception $exception){
             Log::critical('Could not delete user. ERROR: '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Change Admin Status
+     * @param int $id
+     * @urlParam id integer required The User ID
+     * @return JsonResponse
+     * @authenticated
+     */
+    public function makeAdmin(int $id): JsonResponse
+    {
+        try{
+            $user = User::with('customers')->find($id);
+            if(!$user){
+                return $this->commonResponse(false,'User Not Found','', Response::HTTP_NOT_FOUND);
+            }
+            $adminRole = Role::findOrCreate('admin','api');
+            $userRole  = Role::findOrCreate('user','api');
+            if($user->hasRole($adminRole)){
+                return $this->commonResponse(false,'This user has an admin status already','', Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+            if($user->assignRole($adminRole)){
+                return $this->commonResponse(true,'User admin status changed successfully', '', Response::HTTP_OK);
+            }
+            return $this->commonResponse(false,'Failed to change admin status','', Response::HTTP_EXPECTATION_FAILED);
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false,$queryException->errorInfo[2],'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not change user to admin status. ERROR: '.$exception->getTraceAsString());
             return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
