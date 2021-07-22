@@ -30,8 +30,8 @@ Route::group(['prefix' => 'v1'], function(){
     });
 
     Route::group(['middleware' => 'auth:sanctum'], function(){
-        //customer management
-        Route::group(['prefix' => 'customers'], function(){
+        //customer management (both a user and an admin can manage customers )
+        Route::group(['prefix' => 'customers','middleware' => ['role:user|admin']], function(){
             //Route::resource('customers',CustomerController::class);
             Route::get('/',[CustomerController::class,'index']);
             Route::get('/{id}/details',[CustomerController::class,'show']);
@@ -39,21 +39,27 @@ Route::group(['prefix' => 'v1'], function(){
             Route::patch('/{id}/update',[CustomerController::class,'update']);
             Route::delete('/{id}/delete',[CustomerController::class,'destroy']);
         });
-        //user management
-        Route::group(['prefix' => 'users'], function(){
+        //user management (Only admin can perform user management actions)
+        Route::group(['prefix' => 'users','middleware' => ['role:admin']], function(){
             Route::get('/',[UserController::class,'index']);
             Route::get('/{id}/details',[UserController::class,'show']);
             Route::post('/create',[UserController::class,'store']);
             Route::patch('/{id}/update',[UserController::class,'update']);
             Route::delete('/{id}/delete',[UserController::class,'destroy']);
+            //Admin status(make a user an admin if not already
+            Route::group(['prefix' => 'status'], function(){
+                Route::post('/{id}/admin',[UserController::class,'makeAdmin']);
+            });
         });
         //user profile management
-        Route::group(['prefix' => 'user/profile'], function(){
+        Route::group(['prefix' => 'user/profile', 'middleware' => ['role:user|admin']], function(){
             Route::get('/',[ProfileController::class,'profile']);
             Route::patch('/update',[ProfileController::class,'update']);
         });
-        //Roles and Permissions
-        Route::resource('roles',RoleController::class);
-        Route::resource('permissions', PermissionController::class);
+        //Roles and Permissions(Only admin can manage roles and permissions)
+        Route::group(['middleware' => ['role:admin']], function(){
+            Route::resource('roles',RoleController::class);
+            Route::resource('permissions', PermissionController::class);
+        });
     });
 });

@@ -47,7 +47,7 @@ endpoints:
         name: id
         description: 'User ID'
         required: true
-        example: 19
+        example: 18
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -81,25 +81,25 @@ endpoints:
         name: name
         description: 'The User Name'
         required: true
-        example: tempora
+        example: laboriosam
         type: string
       email:
         name: email
         description: 'User Email'
         required: true
-        example: id
+        example: voluptatem
         type: email
       password:
         name: password
         description: 'User Password'
         required: true
-        example: eos
+        example: occaecati
         type: password
       password_confirmation:
         name: password_confirmation
         description: 'Password Confirmation'
         required: true
-        example: quia
+        example: alias
         type: password
     responses: []
     responseFields: []
@@ -121,7 +121,7 @@ endpoints:
         name: id
         description: 'The User ID.'
         required: true
-        example: 5
+        example: 6
         type: integer
     queryParameters: []
     bodyParameters:
@@ -129,13 +129,13 @@ endpoints:
         name: name
         description: 'The name of the user'
         required: true
-        example: cum
+        example: voluptas
         type: string
       email:
         name: email
         description: 'The email of the user'
         required: true
-        example: nulla
+        example: et
         type: string
     responses: []
     responseFields: []
@@ -157,7 +157,31 @@ endpoints:
         name: id
         description: 'The ID of the User'
         required: true
-        example: 18
+        example: 2
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/users/status/{id}/admin'
+    metadata:
+      title: 'Change Admin Status'
+      description: ''
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Access-Control-Allow-Origin: '*'
+    urlParameters:
+      id:
+        name: id
+        description: 'The User ID'
+        required: true
+        example: 12
         type: integer
     queryParameters: []
     bodyParameters: []

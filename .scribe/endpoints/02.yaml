@@ -47,7 +47,7 @@ endpoints:
         name: name
         description: 'The Permission Name'
         required: true
-        example: laudantium
+        example: quia
         type: string
     responses: []
     responseFields: []
@@ -69,7 +69,7 @@ endpoints:
         name: id
         description: 'The Permission ID'
         required: true
-        example: 16
+        example: 8
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -102,7 +102,7 @@ endpoints:
         name: id
         description: 'The Permission ID'
         required: true
-        example: 16
+        example: 5
         type: integer
     queryParameters: []
     bodyParameters:
@@ -110,7 +110,7 @@ endpoints:
         name: name
         description: 'The Permission Name'
         required: true
-        example: sed
+        example: voluptatem
         type: string
     responses: []
     responseFields: []
@@ -132,7 +132,7 @@ endpoints:
         name: id
         description: 'The Permission ID.'
         required: true
-        example: 19
+        example: 14
         type: integer
     queryParameters: []
     bodyParameters: []

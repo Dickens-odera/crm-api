@@ -49,7 +49,7 @@ endpoints:
         name: name
         description: 'Role Name.'
         required: true
-        example: iure
+        example: voluptas
         type: string
     responses: []
     responseFields: []
@@ -71,7 +71,7 @@ endpoints:
         name: id
         description: 'The Role ID'
         required: true
-        example: 15
+        example: 20
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -104,7 +104,7 @@ endpoints:
         name: id
         description: 'The Role ID'
         required: true
-        example: 1
+        example: 9
         type: integer
     queryParameters: []
     bodyParameters:
@@ -112,7 +112,7 @@ endpoints:
         name: name
         description: 'Role Name'
         required: true
-        example: sed
+        example: ex
         type: string
     responses: []
     responseFields: []
@@ -134,7 +134,7 @@ endpoints:
         name: id
         description: 'Role ID'
         required: true
-        example: 20
+        example: 19
         type: integer
     queryParameters: []
     bodyParameters: []
