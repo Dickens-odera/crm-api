@@ -26,7 +26,7 @@ class UserCreatedEventListener
      */
     public function handle(object $event): void
     {
-        $userRole = Role::findOrCreate('user');
+        $userRole = Role::findOrCreate('user','api');
         $event->user->assignRole($userRole);
     }
 }

@@ -17,7 +17,6 @@ class UserTableSeeder extends Seeder
      */
     public function run(): void
     {
-        //DB::table('users')->truncate();
         $admin = User::firstWhere('email', 'admin@agilemonkeys.com');
         if(!$admin){
             $adminUser = User::create([
