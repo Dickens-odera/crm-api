@@ -14,9 +14,16 @@ Key Modules Implemented include:
 Please find the [demo](https://www.agilebackend.tujiajiriafrica.com/docs) url here.
 
 ### Installation
-first clone the repository
+#### Prerequisites
+First things first, kindly ensure that you have the following installed:
+
+- [Git](https://git-scm.com/) for version control
+- [Composer](https://getcomposer.org/download/) for dependency management
+- Database Server
+
+Clone the repository to your local development environment
 ```php
-git clone https://github.com/Dickens-odera/crm-api
+git clone https://github.com/Dickens-odera/crm-api.git
 ```
 Change the directory to the clone path
 ```php
@@ -33,8 +40,8 @@ cp .env.example .env
 ```
 <p>At the Created .env file add the following:</p>
 DB_USERNAME=root<br>
-DB_DATABASE=<your_database_name></br>
-DB_PASSWORD=<your_db_password>
+DB_DATABASE=< your_database_name ></br>
+DB_PASSWORD=< your_database_password >
 
 Generate app key
 ```php
