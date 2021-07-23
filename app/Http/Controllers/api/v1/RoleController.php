@@ -59,7 +59,7 @@ class RoleController extends Controller
             return $this->commonResponse(false, Arr::flatten($validator->messages()->get('*')),'', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         try{
-            $newRole = Role::create($request->validated());
+            $newRole = Role::create(array_merge($request->validated(),['guard_name' => 'api']));
             if($newRole){
                 return $this->commonResponse(true,'Role Created Successfully',new RoleResource($newRole), Response::HTTP_CREATED);
             }

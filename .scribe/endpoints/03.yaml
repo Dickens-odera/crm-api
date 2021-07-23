@@ -47,13 +47,13 @@ endpoints:
         name: name
         description: 'User Name'
         required: true
-        example: voluptas
+        example: est
         type: string
       email:
         name: email
         description: 'User Email'
         required: true
-        example: id
+        example: harum
         type: email
     responses: []
     responseFields: []

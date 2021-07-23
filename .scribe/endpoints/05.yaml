@@ -45,7 +45,7 @@ endpoints:
         name: id
         description: 'User ID'
         required: true
-        example: 11
+        example: 7
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -79,25 +79,25 @@ endpoints:
         name: name
         description: 'The User Name'
         required: true
-        example: delectus
+        example: voluptatem
         type: string
       email:
         name: email
         description: 'User Email'
         required: true
-        example: neque
+        example: ut
         type: email
       password:
         name: password
         description: 'User Password'
         required: true
-        example: quo
+        example: maiores
         type: password
       password_confirmation:
         name: password_confirmation
         description: 'Password Confirmation'
         required: true
-        example: voluptas
+        example: illo
         type: password
     responses: []
     responseFields: []
@@ -119,7 +119,7 @@ endpoints:
         name: id
         description: 'The User ID.'
         required: true
-        example: 5
+        example: 1
         type: integer
     queryParameters: []
     bodyParameters:
@@ -127,13 +127,13 @@ endpoints:
         name: name
         description: 'The name of the user'
         required: true
-        example: sit
+        example: ut
         type: string
       email:
         name: email
         description: 'The email of the user'
         required: true
-        example: quisquam
+        example: ut
         type: string
     responses: []
     responseFields: []
@@ -155,7 +155,7 @@ endpoints:
         name: id
         description: 'The ID of the User'
         required: true
-        example: 3
+        example: 11
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -179,9 +179,71 @@ endpoints:
         name: id
         description: 'The User ID'
         required: true
-        example: 11
+        example: 12
         type: integer
     queryParameters: []
     bodyParameters: []
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/v1/users/{id}/roles'
+    metadata:
+      title: 'List User Specific Roles'
+      description: ''
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Access-Control-Allow-Origin: '*'
+    urlParameters:
+      id:
+        name: id
+        description: 'The User ID'
+        required: false
+        example: 17
+        type: integer
+    queryParameters: []
+    bodyParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/users/{id}/assign-roles'
+    metadata:
+      title: 'Assign Role|Multiple Roles'
+      description: ''
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Access-Control-Allow-Origin: '*'
+    urlParameters:
+      id:
+        name: id
+        description: 'the User ID to be assigned roles'
+        required: true
+        example: 2
+        type: integer
+    queryParameters: []
+    bodyParameters:
+      role_id:
+        name: role_id
+        description: 'The Role ID'
+        required: false
+        example: quia
+        type: required
     responses: []
     responseFields: []

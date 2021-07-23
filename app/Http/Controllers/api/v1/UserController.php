@@ -6,15 +6,18 @@ use App\Events\UserCreated;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\RoleResource;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Database\QueryException;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Psy\Util\Json;
 use Spatie\Permission\Models\Role;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -36,7 +39,7 @@ class UserController extends Controller
     public function index(): JsonResponse
     {
         try{
-            $users = User::with('customers')->latest()->paginate(10);
+            $users = User::with('customers','roles')->latest()->paginate(10);
             if($users->isEmpty()){
                 return $this->commonResponse(false,'Users Not Found','',Response::HTTP_NOT_FOUND);
             }
@@ -96,7 +99,7 @@ class UserController extends Controller
     public function show(int $id): JsonResponse
     {
         try{
-            $user = User::with('customers')->find($id);
+            $user = User::with('customers','roles')->find($id);
             if(!$user){
                 return $this->commonResponse(false,'User Not Found','',Response::HTTP_NOT_FOUND);
             }
@@ -127,7 +130,7 @@ class UserController extends Controller
             return $this->commonResponse(false,Arr::flatten($validator->messages()->get('*')),'',Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         try{
-            $user = User::with('customers')->find($id);
+            $user = User::with('customers','roles')->find($id);
             if(!$user){
                 return $this->commonResponse(false,'User Not Found','',Response::HTTP_NOT_FOUND);
             }
@@ -154,7 +157,7 @@ class UserController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try{
-            $user = User::with('customers')->find($id);
+            $user = User::with('customers','roles')->find($id);
             if(!$user){
                 return $this->commonResponse(false,'User Not Found','', Response::HTTP_NOT_FOUND);
             }
@@ -180,7 +183,7 @@ class UserController extends Controller
     public function makeAdmin(int $id): JsonResponse
     {
         try{
-            $user = User::with('customers')->find($id);
+            $user = User::with('customers','roles')->find($id);
             if(!$user){
                 return $this->commonResponse(false,'User Not Found','', Response::HTTP_NOT_FOUND);
             }
@@ -199,5 +202,91 @@ class UserController extends Controller
             Log::critical('Could not change user to admin status. ERROR: '.$exception->getTraceAsString());
             return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+
+    /**
+     * List User Specific Roles
+     * @param int $id
+     * @return JsonResponse
+     * @urlParam id integer The User ID
+     * @authenticated
+     */
+    public function roles( int $id ): JsonResponse
+    {
+        try{
+            $user = User::with('customers','roles')->find($id);
+            if(!$user){
+                return $this->commonResponse(false,'User Not Found','', Response::HTTP_NOT_FOUND);
+            }
+            $UserRoles = $user->roles()->latest()->paginate(10);
+            return $this->commonResponse(true,'Assigned Roles',RoleResource::collection($UserRoles)->response()->getData(true), Response::HTTP_OK);;
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false,$queryException->errorInfo[2],'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not fetch user roles. ERROR: '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * Assign Role|Multiple Roles
+     * @param Request $request
+     * @param int $id
+     * @bodyParam role_id required The Role ID
+     * @urlParam id integer required the User ID to be assigned roles
+     * @return JsonResponse
+     * @authenticated
+     */
+    public function assignRoles( Request $request, int $id ): JsonResponse
+    {
+        $validator = Validator::make($request->all(),['role_id.*' => 'required|integer']); //exists:roles,id
+        if($validator->fails()){
+            return $this->commonResponse(false,Arr::flatten($validator->messages()->get('*')),'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        try{
+            $user = User::with('customers','roles')->find($id);
+            if(!$user){
+                return $this->commonResponse(false,'User Not Found','', Response::HTTP_NOT_FOUND);
+            }
+            //check for role by id
+            $role = Role::findById((int)$request->role_id,'api');
+            if(!$role){
+                return $this->commonResponse(false,'Role Not Found','',Response::HTTP_NOT_FOUND);
+            }
+            $roleIds = explode(',', $request->role_id);
+            if(count($roleIds) > 1){
+                return $this->assignMultipleRoles($request, $user);
+            }
+            if($user->hasRole($role->name)){
+                return $this->commonResponse(false,'User Has '.$role->name.' role already','',Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+            $user->assignRole($role);
+            $assignedRoles = $user->roles()->latest()->paginate(10);
+            return $this->commonResponse(false,'User Assigned '.$role->name.' successfully', RoleResource::collection($assignedRoles), Response::HTTP_OK);;
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false,$queryException->errorInfo[2],'',Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Failed to assign roles. ERROR: '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'',Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
+     * @param Request $request
+     * @param $user
+     * @return JsonResponse
+     */
+    private function assignMultipleRoles(Request $request, $user): JsonResponse
+    {
+        $roleIds = explode(',', $request->role_id);
+        $userRoles = Role::whereIn('id',$roleIds)->get();
+        if($user->hasAnyRole($userRoles)){
+            foreach($userRoles as $role){
+                return $this->commonResponse(false,$role->name.' already assigned to user','', Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+        }
+        $user->assignRole($userRoles);
+        $roles = $user->roles()->latest()->paginate(10);
+        return $this->commonResponse(true,'Roles Assigned Successfully to user', RoleResource::collection($roles)->response()->getData(true),Response::HTTP_OK);
     }
 }
