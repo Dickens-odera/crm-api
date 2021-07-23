@@ -60,7 +60,7 @@ class PermissionController extends Controller
             return $this->commonResponse(false,Arr::flatten($validator->messages()->get('*')), '', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         try{
-            $newPermission = Permission::create($request->validated());
+            $newPermission = Permission::create(array_merge($request->validated(),['guard_name' => 'api']));
             if($newPermission){
                 return $this->commonResponse(true,'Permission Created Successfully',new PermissionResource($newPermission),Response::HTTP_CREATED);
             }
