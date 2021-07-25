@@ -47,7 +47,7 @@ endpoints:
         name: id
         description: 'User ID'
         required: true
-        example: 7
+        example: 12
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -81,25 +81,25 @@ endpoints:
         name: name
         description: 'The User Name'
         required: true
-        example: voluptatem
+        example: deserunt
         type: string
       email:
         name: email
         description: 'User Email'
         required: true
-        example: ut
+        example: magnam
         type: email
       password:
         name: password
         description: 'User Password'
         required: true
-        example: maiores
+        example: quis
         type: password
       password_confirmation:
         name: password_confirmation
         description: 'Password Confirmation'
         required: true
-        example: illo
+        example: ut
         type: password
     responses: []
     responseFields: []
@@ -121,7 +121,7 @@ endpoints:
         name: id
         description: 'The User ID.'
         required: true
-        example: 1
+        example: 10
         type: integer
     queryParameters: []
     bodyParameters:
@@ -129,13 +129,13 @@ endpoints:
         name: name
         description: 'The name of the user'
         required: true
-        example: ut
+        example: eos
         type: string
       email:
         name: email
         description: 'The email of the user'
         required: true
-        example: ut
+        example: sapiente
         type: string
     responses: []
     responseFields: []
@@ -157,7 +157,7 @@ endpoints:
         name: id
         description: 'The ID of the User'
         required: true
-        example: 11
+        example: 6
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -181,7 +181,7 @@ endpoints:
         name: id
         description: 'The User ID'
         required: true
-        example: 12
+        example: 10
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -205,7 +205,7 @@ endpoints:
         name: id
         description: 'The User ID'
         required: false
-        example: 17
+        example: 5
         type: integer
     queryParameters: []
     bodyParameters: []
@@ -245,7 +245,37 @@ endpoints:
         name: role_id
         description: 'The Role ID'
         required: false
-        example: quia
+        example: qui
+        type: required
+    responses: []
+    responseFields: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/v1/users/{id}/revoke-roles'
+    metadata:
+      title: 'Revoke Role|Roles from a user'
+      description: ''
+      authenticated: true
+    headers:
+      Authorization: 'Bearer {YOUR_AUTH_KEY}'
+      Content-Type: application/json
+      Accept: application/json
+      Access-Control-Allow-Origin: '*'
+    urlParameters:
+      id:
+        name: id
+        description: 'User ID'
+        required: true
+        example: 9
+        type: integer
+    queryParameters: []
+    bodyParameters:
+      role_id:
+        name: role_id
+        description: 'The role(s) to be revoked(for many roles, use comma separated IDs)'
+        required: false
+        example: voluptatem
         type: required
     responses: []
     responseFields: []

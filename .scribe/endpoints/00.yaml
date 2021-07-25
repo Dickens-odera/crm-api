@@ -20,25 +20,25 @@ endpoints:
         name: name
         description: 'The name of the user.'
         required: true
-        example: odit
+        example: saepe
         type: string
       email:
         name: email
         description: 'The email address of the user.'
         required: true
-        example: iste
+        example: tempora
         type: string
       password:
         name: password
         description: Password.
         required: true
-        example: atque
+        example: ullam
         type: password
       password_confirmation:
         name: password_confirmation
         description: 'Password Confirmation'
         required: true
-        example: non
+        example: iste
         type: password
     responses: []
     responseFields: []
@@ -61,13 +61,13 @@ endpoints:
         name: email
         description: 'Email Address'
         required: true
-        example: tenetur
+        example: tempore
         type: string
       password:
         name: password
         description: Password
         required: true
-        example: at
+        example: pariatur
         type: password
     responses: []
     responseFields: []

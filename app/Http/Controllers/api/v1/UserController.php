@@ -272,6 +272,49 @@ class UserController extends Controller
     }
 
     /**
+     * Revoke Role|Roles from a user
+     * @param Request $request
+     * @param int $id
+     * @urlParam id integer required User ID
+     * @bodyParam role_id required The role(s) to be revoked(for many roles, use comma separated IDs)
+     * @return JsonResponse
+     * @authenticated
+     */
+    public function revokeRoles(Request $request, int $id): JsonResponse
+    {
+        $validator = Validator::make($request->all(), ['role_id.*' => 'required|integer|exists:roles,id']);
+        if($validator->fails()){
+            return $this->commonResponse(false, Arr::flatten($validator->messages()->get('*')),'', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
+        try{
+            $user = User::with('customers','roles')->find($id);
+            if(!$user){
+                return $this->commonResponse(false,'User Not Found','', Response::HTTP_NOT_FOUND);
+            }
+            $roleIds = explode(',', $request->role_id);
+            if(count($roleIds) > 1){
+                return $this->revokeMultipleRoles($request, $user);
+            }
+            $role = Role::findById((int)$request->role_id,'api');
+            if(!$role){
+                return $this->commonResponse(false,'Role Not Found','', Response::HTTP_NOT_FOUND);
+            }
+            if(!$user->hasRole($role)){
+                return $this->commonResponse(false,'User has no '.$role->name.' role','',Response::HTTP_UNPROCESSABLE_ENTITY);
+            }
+            if($user->removeRole($role)){
+                return $this->commonResponse(true,'Role revoked successfully','', Response::HTTP_OK);
+            }
+            return $this->commonResponse(false,'Could Not Revoke Role, please try again','', Response::HTTP_EXPECTATION_FAILED);
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false, $queryException->errorInfo[2],'', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Could not revoke user role. ERROR: '. $exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
      * @param Request $request
      * @param $user
      * @return JsonResponse
@@ -288,5 +331,34 @@ class UserController extends Controller
         $user->assignRole($userRoles);
         $roles = $user->roles()->latest()->paginate(10);
         return $this->commonResponse(true,'Roles Assigned Successfully to user', RoleResource::collection($roles)->response()->getData(true),Response::HTTP_OK);
+    }
+
+    /**
+     * Remove Multiple User Roles
+     * @param Request $request
+     * @param $user
+     * @return JsonResponse
+     */
+    private function revokeMultipleRoles(Request $request, $user): JsonResponse
+    {
+        $roleIds = explode(',', $request->role_id);
+        try{
+            $roles = Role::whereIn('id',$roleIds)->get();
+            foreach($roles as $role){
+                if(!$user->hasRole($role)) {
+                    return $this->commonResponse(false,'User has no '.$role->name.' role','', Response::HTTP_UNPROCESSABLE_ENTITY);
+                }
+                if($user->removeRole($role)){
+                    $userRoles = $user->roles()->latest()->paginate(10);
+                    return $this->commonResponse(true,'Roles revoked successfully',RoleResource::collection($userRoles)->response()->getData(true), Response::HTTP_OK);
+                }
+            }
+            return $this->commonResponse(false,'Failed To Revoke Roles','', Response::HTTP_EXPECTATION_FAILED);
+        }catch (QueryException $queryException){
+            return $this->commonResponse(false, $queryException->errorInfo[2],'', Response::HTTP_UNPROCESSABLE_ENTITY);
+        }catch (Exception $exception){
+            Log::critical('Failed to revoke multiple roles: ERROR: '.$exception->getTraceAsString());
+            return $this->commonResponse(false,$exception->getMessage(),'', Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }

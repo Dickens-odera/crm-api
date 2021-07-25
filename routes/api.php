@@ -48,6 +48,7 @@ Route::group(['prefix' => 'v1'], function(){
             Route::delete('/{id}/delete',[UserController::class,'destroy']);
             Route::get('/{id}/roles',[UserController::class,'roles']);
             Route::post('/{id}/assign-roles',[UserController::class,'assignRoles']);
+            Route::post('/{id}/revoke-roles',[UserController::class,'revokeRoles']);
             //Admin status(make a user an admin if not already
             Route::group(['prefix' => 'status'], function(){
                 Route::post('/{id}/admin',[UserController::class,'makeAdmin']);

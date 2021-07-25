@@ -83,7 +83,7 @@ class Handler extends ExceptionHandler
         } elseif ($e instanceof ValidationException) {
             return $this->convertValidationExceptionToResponse($e, $request);
         }elseif($e instanceof UnauthorizedException){
-            return $this->commonResponse(false,'Action Not Allowed','',Response::HTTP_FORBIDDEN);
+            return $this->commonResponse(false,'Forbidden','',Response::HTTP_FORBIDDEN);
         }
 
         return $request->expectsJson()
