@@ -2,6 +2,8 @@ name: PHP and Composer Setup
 
 on:
   workflow_dispatch:
+    push:
+      - master
   pull_request:
     branches:
       - develop
