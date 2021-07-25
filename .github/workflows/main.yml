@@ -2,14 +2,14 @@ name: PHP and Composer Setup
 
 on:
   workflow_dispatch:
-    push:
+  push:
+    branches:
       - master
   pull_request:
     branches:
       - develop
       - staging
       - master
-
 jobs:
   build:
 
