@@ -84,7 +84,7 @@ class PermissionController extends Controller
     public function show(int $id): JsonResponse
     {
         try{
-            $permission = Permission::findById($id);
+            $permission = Permission::findById($id,'api');
             if(!$permission){
                 return $this->commonResponse(false,'Permission Not Found','', Response::HTTP_NOT_FOUND);
             }
@@ -114,7 +114,7 @@ class PermissionController extends Controller
             return $this->commonResponse(false,Arr::flatten($validator->messages()->get('*')), '', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         try{
-            $permission = Permission::findById($id);
+            $permission = Permission::findById($id,'api');
             if(!$permission){
                 return $this->commonResponse(false,'Permission Not Found','', Response::HTTP_NOT_FOUND);
             }
@@ -141,7 +141,7 @@ class PermissionController extends Controller
     public function destroy(int $id): JsonResponse
     {
         try{
-            $permission = Permission::findById($id);
+            $permission = Permission::findById($id,'api');
             if(!$permission){
                 return $this->commonResponse(false,'Permission Not Found','', Response::HTTP_NOT_FOUND);
             }

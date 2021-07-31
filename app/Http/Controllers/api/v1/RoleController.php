@@ -83,7 +83,7 @@ class RoleController extends Controller
     public function show(int $id): JsonResponse
     {
         try{
-            $role = Role::findById($id);
+            $role = Role::findById($id,'api');
             if(!$role){
                 return $this->commonResponse(false,'Role Not Found','', Response::HTTP_NOT_FOUND);
             }
@@ -113,7 +113,7 @@ class RoleController extends Controller
             return $this->commonResponse(false,Arr::flatten($validator->messages()->get('*')), '', Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         try{
-            $role = Role::findById($id);
+            $role = Role::findById($id,'api');
             if(!$role){
                 return $this->commonResponse(false,'Role Not Found','', Response::HTTP_NOT_FOUND);
             }
@@ -139,7 +139,7 @@ class RoleController extends Controller
     public function destroy( int $id ): JsonResponse
     {
         try{
-            $role = Role::findById($id);
+            $role = Role::findById($id,'api');
             if(!$role){
                 return $this->commonResponse(false,'Role Not Found','', Response::HTTP_NOT_FOUND);
             }
